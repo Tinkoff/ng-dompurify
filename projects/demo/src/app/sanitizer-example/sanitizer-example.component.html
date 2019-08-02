@@ -1,0 +1,9 @@
+<h1>DOM</h1>
+<section>
+    <label>
+        Enter HTML here:
+        <textarea [(ngModel)]="value"></textarea>
+    </label>
+    <h2>Resulting HTML sanitized by DomSanitizer:</h2>
+    <div [innerHtml]="value"></div>
+</section>

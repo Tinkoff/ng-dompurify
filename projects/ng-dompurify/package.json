@@ -1,0 +1,14 @@
+{
+    "name": "@tinkoff/ng-dompurify",
+    "version": "1.0.0",
+    "peerDependencies": {
+        "@angular/core": ">=4.0.0"
+    },
+    "description": "Inclusive Angular API for DOMPurify",
+    "keywords": ["angular", "ng", "dompurify", "sanitizer", "DomSanitizer", "tinkoff"],
+    "license": "Apache-2.0",
+    "authors": ["Roman Sedov <r.sedov@tinkoff.ru>", "Alex Inkin <a.inkin@tinkoff.ru>"],
+    "repository": "https://github.com/TinkoffCreditSystems/ng-dompurify",
+    "bugs": "https://github.com/TinkoffCreditSystems/ng-dompurify/issues",
+    "homepage": "https://github.com/TinkoffCreditSystems/ng-dompurify#README"
+}

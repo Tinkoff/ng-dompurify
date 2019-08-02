@@ -1,0 +1,11 @@
+<h1>
+    Pipe
+</h1>
+<section>
+    <label>
+        Enter HTML here:
+        <textarea [(ngModel)]="value"></textarea>
+    </label>
+    <h2>Resulting value processed through pipe:</h2>
+    <blockquote [textContent]="unwrap(value | dompurify)"></blockquote>
+</section>
