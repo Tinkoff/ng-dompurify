@@ -1,5 +1,7 @@
 # NgDompurify
 
+[![code style: @tinkoff/linters](https://img.shields.io/badge/code%20style-%40tinkoff%2Flinters-blue?style=flat-square)](https://github.com/TinkoffCreditSystems/linters)
+
 > This library implements `DOMPurify` as Angular entire `DomSanitizer` and as standalone Sanitizer or Pipe.
 > It delegates sanitizing to `DOMPurify` and supports the same configuration. See [DOMPurify](https://github.com/cure53/DOMPurify).
 
