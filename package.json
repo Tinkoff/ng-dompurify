@@ -8,7 +8,7 @@
         "test": "ng test --browsers ChromeHeadless --watch=false --code-coverage",
         "test:ci": "npm run test && npm run coveralls",
         "test:watch": "ng test --browsers ChromeHeadless --watch=true --code-coverage",
-        "coveralls": "cat coverage/angular-contenteditable-accessor/lcov.info | coveralls",
+        "coveralls": "cat coverage/ng-dompurify/lcov.info | coveralls",
         "lint": "ng lint",
         "typecheck": "tsc --noEmit --skipLibCheck"
     },
