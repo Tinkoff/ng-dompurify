@@ -6,7 +6,9 @@
         "start": "ng serve",
         "build": "ng build",
         "test": "ng test --browsers ChromeHeadless --watch=false --code-coverage",
+        "test:ci": "npm run test && npm run coveralls",
         "test:watch": "ng test --browsers ChromeHeadless --watch=true --code-coverage",
+        "coveralls": "cat coverage/angular-contenteditable-accessor/lcov.info | coveralls",
         "lint": "ng lint",
         "typecheck": "tsc --noEmit --skipLibCheck"
     },
@@ -43,6 +45,7 @@
         "@types/jasminewd2": "~2.0.3",
         "@types/node": "~8.9.4",
         "codelyzer": "^5.0.0",
+        "coveralls": "^3.0.5",
         "husky": "^2.7.0",
         "jasmine-core": "~3.4.0",
         "jasmine-spec-reporter": "~4.2.1",
