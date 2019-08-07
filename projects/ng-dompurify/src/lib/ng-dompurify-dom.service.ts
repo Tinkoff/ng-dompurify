@@ -1,4 +1,4 @@
-import {Injectable, SecurityContext, Inject} from '@angular/core';
+import {Injectable, SecurityContext} from '@angular/core';
 import {
     DomSanitizer,
     SafeHtml,
@@ -13,22 +13,19 @@ import {SafeStyleImplementation} from './safe-value/safe-style-implementation';
 import {SafeScriptImplementation} from './safe-value/safe-script-implementation';
 import {SafeUrlImplementation} from './safe-value/safe-url-implementation';
 import {SafeResourceUrlImplementation} from './safe-value/safe-resource-url-implementation';
-import {purify} from './purify';
 import {AbstractSafeValue} from './safe-value/absctract-safe-value';
 import {DOMPURIFY_CONFIG} from './const/dompurify-config';
 import {NgDompurifyConfig} from './types/ng-dompurify-config';
+import {NgDompurifySanitizer} from './ng-dompurify.service';
 
 /**
- * Implementation of Angular {@link DomSanitizer} purifying via dompurify
+ * Implementation of Angular {@link DomSanitizer} purifying via dompurify and {@link NgDompurifySanitizer}
  *
  * use {@link DOMPURIFY_CONFIG} token to provide config ({@link NgDompurifyConfig})
  */
 @Injectable()
 export class NgDompurifyDomSanitizer extends DomSanitizer {
-    constructor(
-        @Inject(DOMPURIFY_CONFIG)
-        private readonly config: NgDompurifyConfig,
-    ) {
+    constructor(private readonly sanitizer: NgDompurifySanitizer) {
         super();
     }
 
@@ -40,7 +37,7 @@ export class NgDompurifyDomSanitizer extends DomSanitizer {
             case SecurityContext.HTML:
             case SecurityContext.URL:
             case SecurityContext.RESOURCE_URL:
-                return this.sanitizeSupportedValue(value);
+                return this.sanitizeSupportedValue(context, value);
             default:
                 return null;
         }
@@ -66,11 +63,12 @@ export class NgDompurifyDomSanitizer extends DomSanitizer {
         return new SafeResourceUrlImplementation(value);
     }
 
-    private sanitizeSupportedValue(value: SafeValue | string | null): string {
-        if (value instanceof AbstractSafeValue) {
-            return value.safeValue;
-        }
-
-        return purify(value, this.config);
+    private sanitizeSupportedValue(
+        context: SecurityContext,
+        value: SafeValue | string | null,
+    ): string {
+        return value instanceof AbstractSafeValue
+            ? value.safeValue
+            : this.sanitizer.sanitize(context, value);
     }
 }

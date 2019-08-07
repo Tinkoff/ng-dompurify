@@ -1,22 +1,25 @@
 import {Pipe, PipeTransform, SecurityContext} from '@angular/core';
 import {DomSanitizer, SafeValue} from '@angular/platform-browser';
-import {purify} from './purify';
 import {NgDompurifyConfig} from './types/ng-dompurify-config';
 import {NGDOMPURIFY_DEFAULT_CONFIG} from './const/default-config';
+import {NgDompurifySanitizer} from './ng-dompurify.service';
 
 /**
- * Pipe that transforms dirty HTML to clean via {@link purify}
+ * Pipe that transforms dirty HTML to clean via {@link NgDompurifySanitizer}
  */
 @Pipe({name: 'dompurify'})
 export class NgDompurifyPipe implements PipeTransform {
-    constructor(private readonly domSanitizer: DomSanitizer) {}
+    constructor(
+        private readonly sanitizer: NgDompurifySanitizer,
+        private readonly domSanitizer: DomSanitizer,
+    ) {}
 
     transform(
         value: {} | string | null,
         context: SecurityContext = SecurityContext.HTML,
         config: NgDompurifyConfig = NGDOMPURIFY_DEFAULT_CONFIG,
     ): SafeValue | null {
-        const sanitizedValue = purify(value, config);
+        const sanitizedValue = this.sanitizer.sanitize(context, value, config);
 
         return this.bypassSecurityTrust(context, sanitizedValue);
     }

@@ -1,8 +1,6 @@
 /*
  * Public API Surface of ng-dompurify
  */
-
-export * from './lib/purify';
 export * from './lib/ng-dompurify.service';
 export * from './lib/ng-dompurify-dom.service';
 export * from './lib/ng-dompurify.pipe';
