@@ -8,13 +8,15 @@ import {SafeUrlImplementation} from '../safe-value/safe-url-implementation';
 import {SafeResourceUrlImplementation} from '../safe-value/safe-resource-url-implementation';
 import {NgDompurifyDomSanitizer} from '../ng-dompurify-dom.service';
 import {AbstractSafeValue} from '../safe-value/absctract-safe-value';
+import {NgDompurifySanitizer} from '../ng-dompurify.service';
 
 describe('NgDompurifyPipe', () => {
-    const sanitizer = new NgDompurifyDomSanitizer({});
+    const sanitizer = new NgDompurifySanitizer({});
+    const domSanitizer = new NgDompurifyDomSanitizer(sanitizer);
     let pipe: NgDompurifyPipe;
 
     beforeEach(() => {
-        pipe = new NgDompurifyPipe(sanitizer);
+        pipe = new NgDompurifyPipe(sanitizer, domSanitizer);
     });
 
     it('transforms content to SafeValue with clean value', () => {
