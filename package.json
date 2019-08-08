@@ -13,18 +13,9 @@
         "typecheck": "tsc --noEmit --skipLibCheck"
     },
     "description": "Inclusive angular api for dompurify",
-    "keywords": [
-        "angular",
-        "ng",
-        "dompurify",
-        "DomSanitizer",
-        "tinkoff"
-    ],
+    "keywords": ["angular", "ng", "dompurify", "DomSanitizer", "tinkoff"],
     "license": "Apache-2.0",
-    "authors": [
-        "Roman Sedov <r.sedov@tinkoff.ru>",
-        "Alex Inkin <a.inkin@tinkoff.ru>"
-    ],
+    "authors": ["Roman Sedov <r.sedov@tinkoff.ru>", "Alex Inkin <a.inkin@tinkoff.ru>"],
     "repository": "https://github.com/TinkoffCreditSystems/ng-dompurify",
     "bugs": "https://github.com/TinkoffCreditSystems/ng-dompurify/issues",
     "homepage": "https://github.com/TinkoffCreditSystems/ng-dompurify#README",
@@ -77,12 +68,7 @@
         }
     },
     "lint-staged": {
-        "linters": {
-            "*.{js,ts,html,md,less,json}": [
-                "prettier --write",
-                "git add"
-            ],
-            "*.ts": "tslint"
-        }
+        "*.{js,ts,html,md,less,json}": ["prettier --write", "git add"],
+        "*.ts": "tslint"
     }
 }
