@@ -19,6 +19,12 @@ describe('NgDompurifySanitizer', () => {
         expect(service).toBeTruthy();
     });
 
+    it('should work with null value', () => {
+        const sanitized = service.sanitize(SecurityContext.HTML, null);
+
+        expect(sanitized).toBe('');
+    });
+
     it('should sanitize HTML', () => {
         const sanitized = service.sanitize(SecurityContext.HTML, dirtyHtml);
 
