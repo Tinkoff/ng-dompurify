@@ -5,6 +5,7 @@
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
+        "postbuild": "node scripts/postbuild.js",
         "test": "ng run ng-dompurify:test --browsers ChromeHeadless --watch=false --code-coverage",
         "test:ci": "npm run test && npm run coveralls",
         "test:watch": "ng run ng-dompurify:test --browsers ChromeHeadless --watch=true --code-coverage",
