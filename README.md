@@ -1,9 +1,9 @@
 # NgDompurify
 
-[![Build](https://travis-ci.org/TinkoffCreditSystems/ng-dompurify.svg?branch=master)](https://travis-ci.org/TinkoffCreditSystems/ng-dompurify)
-[![Coverage Status](https://coveralls.io/repos/github/TinkoffCreditSystems/ng-dompurify/badge.svg?branch=master)](https://coveralls.io/github/TinkoffCreditSystems/ng-dompurify?branch=master)
-[![npm version](https://badge.fury.io/js/%40tinkoff%2Fng-dompurify.svg)](https://npmjs.com/package/@tinkoff/ng-dompurify)
-[![code style: @tinkoff/linters](https://img.shields.io/badge/code%20style-%40tinkoff%2Flinters-blue)](https://github.com/TinkoffCreditSystems/linters)
+[![Build](https://img.shields.io/travis/TinkoffCreditSystems/ng-dompurify.svg?branch=master&style=flat-square)](https://travis-ci.org/TinkoffCreditSystems/ng-dompurify)
+[![Coverage Status](https://img.shields.io/coveralls/github/TinkoffCreditSystems/ng-dompurify?branch=master&style=flat-square)](https://coveralls.io/github/TinkoffCreditSystems/ng-dompurify?branch=master)
+[![npm version](https://img.shields.io/npm/v/@tinkoff/ng-dompurify.svg?style=flat-square)](https://npmjs.com/package/@tinkoff/ng-dompurify)
+[![code style: @tinkoff/linters](https://img.shields.io/badge/code%20style-%40tinkoff%2Flinters-blue?style=flat-square)](https://github.com/TinkoffCreditSystems/linters)
 
 > This library implements `DOMPurify` as Angular entire `DomSanitizer` and as standalone Sanitizer or Pipe.
 > It delegates sanitizing to `DOMPurify` and supports the same configuration. See [DOMPurify](https://github.com/cure53/DOMPurify).
