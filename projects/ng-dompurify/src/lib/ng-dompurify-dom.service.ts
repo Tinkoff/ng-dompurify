@@ -14,14 +14,10 @@ import {SafeScriptImplementation} from './safe-value/safe-script-implementation'
 import {SafeUrlImplementation} from './safe-value/safe-url-implementation';
 import {SafeResourceUrlImplementation} from './safe-value/safe-resource-url-implementation';
 import {AbstractSafeValue} from './safe-value/absctract-safe-value';
-import {DOMPURIFY_CONFIG} from './const/dompurify-config';
-import {NgDompurifyConfig} from './types/ng-dompurify-config';
 import {NgDompurifySanitizer} from './ng-dompurify.service';
 
 /**
- * Implementation of Angular {@link DomSanitizer} purifying via dompurify and {@link NgDompurifySanitizer}
- *
- * use {@link DOMPURIFY_CONFIG} token to provide config ({@link NgDompurifyConfig})
+ * Implementation of Angular {@link DomSanitizer} purifying via DOMPurify and {@link NgDompurifySanitizer}
  */
 @Injectable()
 export class NgDompurifyDomSanitizer extends DomSanitizer {
@@ -33,7 +29,6 @@ export class NgDompurifyDomSanitizer extends DomSanitizer {
         switch (context) {
             case SecurityContext.SCRIPT:
             case SecurityContext.STYLE:
-                throw new Error('dompurify supports HTML, URL and RESOURSE_URL contexts');
             case SecurityContext.HTML:
             case SecurityContext.URL:
             case SecurityContext.RESOURCE_URL:
