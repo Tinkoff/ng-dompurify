@@ -15,6 +15,9 @@ import {createAfterSanitizeAttributes} from './utils/createAfterSanitizeAttribut
  * use {@link DOMPURIFY_CONFIG} token to provide config ({@link NgDompurifyConfig})
  * use {@link SANITIZE_STYLE} token to provide a style sanitizing method ({@link SanitizeStyle})
  * use {@link DOMPURIFY_HOOKS} token to provide a hooks for DOMPurify ({@link addHook})
+ *
+ * Ambient type cannot be used without @dynamic https://github.com/angular/angular/issues/23395
+ * @dynamic
  */
 @Injectable({
     providedIn: 'root',
