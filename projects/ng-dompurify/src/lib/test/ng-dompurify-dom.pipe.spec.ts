@@ -1,20 +1,30 @@
 import {CommonModule} from '@angular/common';
 import {Component, ElementRef, SecurityContext, ViewChild} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {NgDompurifyPipe} from '../ng-dompurify.pipe';
-import {cleanHtml, dirtyHtml} from './test-samples/html';
-import {NgDompurifyModule} from '../ng-dompurify.module';
-import {sanitizeStyle} from './test-samples/sanitizeStyle';
-import {SANITIZE_STYLE} from '../tokens/sanitize-style';
-import {cleanUrl, dirtyUrl} from './test-samples/url';
 import {removeAllHooks} from 'dompurify';
+import {NgDompurifyModule} from '../ng-dompurify.module';
+import {SANITIZE_STYLE} from '../tokens/sanitize-style';
+import {cleanHtml, dirtyHtml} from './test-samples/html';
+import {sanitizeStyle} from './test-samples/sanitizeStyle';
+import {cleanUrl, dirtyUrl} from './test-samples/url';
 
 describe('NgDompurifyPipe', () => {
     @Component({
         template: `
-            <div #element *ngIf="html" [innerHTML]="content | dompurify : context : config">test</div>
-            <div #element *ngIf="style" [style.color]="content | dompurify : context : config"></div>
-            <img #element *ngIf="url" alt="" [src]="content | dompurify : context : config">
+            <div #element *ngIf="html" [innerHTML]="content | dompurify: context:config">
+                test
+            </div>
+            <div
+                #element
+                *ngIf="style"
+                [style.color]="content | dompurify: context:config"
+            ></div>
+            <img
+                #element
+                *ngIf="url"
+                alt=""
+                [src]="content | dompurify: context:config"
+            />
         `,
     })
     class TestComponent {
@@ -22,14 +32,16 @@ describe('NgDompurifyPipe', () => {
         context?: SecurityContext = SecurityContext.HTML;
         config? = {};
 
-        @ViewChild('element', { static: false })
+        @ViewChild('element', {static: false})
         readonly element!: ElementRef<HTMLElement>;
 
         get html(): boolean {
-            return this.context === undefined
-                || this.context === SecurityContext.HTML
-                || this.context === SecurityContext.SCRIPT
-                || this.context === SecurityContext.NONE;
+            return (
+                this.context === undefined ||
+                this.context === SecurityContext.HTML ||
+                this.context === SecurityContext.SCRIPT ||
+                this.context === SecurityContext.NONE
+            );
         }
 
         get style(): boolean {
@@ -37,8 +49,10 @@ describe('NgDompurifyPipe', () => {
         }
 
         get url(): boolean {
-            return this.context === SecurityContext.URL
-                || this.context === SecurityContext.RESOURCE_URL
+            return (
+                this.context === SecurityContext.URL ||
+                this.context === SecurityContext.RESOURCE_URL
+            );
         }
     }
 
@@ -54,7 +68,7 @@ describe('NgDompurifyPipe', () => {
                     provide: SANITIZE_STYLE,
                     useValue: sanitizeStyle,
                 },
-            ]
+            ],
         });
     });
 
@@ -89,7 +103,9 @@ describe('NgDompurifyPipe', () => {
         testComponent.config = {FORBID_TAGS: ['br']};
         fixture.detectChanges();
 
-        expect(testComponent.element.nativeElement.innerHTML).toBe(cleanHtml.replace('<br>', ''));
+        expect(testComponent.element.nativeElement.innerHTML).toBe(
+            cleanHtml.replace('<br>', ''),
+        );
     });
 
     it('sanitizes URL', () => {

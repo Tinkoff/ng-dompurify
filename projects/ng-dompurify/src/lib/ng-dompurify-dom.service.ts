@@ -2,19 +2,19 @@ import {Injectable, SecurityContext} from '@angular/core';
 import {
     DomSanitizer,
     SafeHtml,
-    SafeStyle,
-    SafeScript,
-    SafeUrl,
     SafeResourceUrl,
+    SafeScript,
+    SafeStyle,
+    SafeUrl,
     SafeValue,
 } from '@angular/platform-browser';
-import {SafeHtmlImplementation} from './safe-value/safe-html-implementation';
-import {SafeStyleImplementation} from './safe-value/safe-style-implementation';
-import {SafeScriptImplementation} from './safe-value/safe-script-implementation';
-import {SafeUrlImplementation} from './safe-value/safe-url-implementation';
-import {SafeResourceUrlImplementation} from './safe-value/safe-resource-url-implementation';
-import {AbstractSafeValue} from './safe-value/absctract-safe-value';
 import {NgDompurifySanitizer} from './ng-dompurify.service';
+import {AbstractSafeValue} from './safe-value/absctract-safe-value';
+import {SafeHtmlImplementation} from './safe-value/safe-html-implementation';
+import {SafeResourceUrlImplementation} from './safe-value/safe-resource-url-implementation';
+import {SafeScriptImplementation} from './safe-value/safe-script-implementation';
+import {SafeStyleImplementation} from './safe-value/safe-style-implementation';
+import {SafeUrlImplementation} from './safe-value/safe-url-implementation';
 
 /**
  * Implementation of Angular {@link DomSanitizer} purifying via DOMPurify and {@link NgDompurifySanitizer}

@@ -1,3 +1,7 @@
 {
-    "extends": ["@tinkoff/linters/tslint/bases/prettier.tslint.json"]
+    "extends": ["@tinkoff/linters/tslint/bases/prettier.tslint.json"],
+    "rules": {
+        "ordered-imports": true,
+        "no-unused-variable": true
+    }
 }

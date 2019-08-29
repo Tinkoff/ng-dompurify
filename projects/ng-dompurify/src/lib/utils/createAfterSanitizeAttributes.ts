@@ -1,11 +1,13 @@
-import {SanitizeStyle} from '../types/sanitize-style';
 import {DompurifyHook} from '../types/dompurify-hook';
+import {SanitizeStyle} from '../types/sanitize-style';
 import {validateStyles} from './validateStyles';
 
 /**
  * afterSanitizeAttributes factory to sanitize CSS rules from inline styles through custom function
  */
-export function createAfterSanitizeAttributes(sanitizeStyle: SanitizeStyle): DompurifyHook {
+export function createAfterSanitizeAttributes(
+    sanitizeStyle: SanitizeStyle,
+): DompurifyHook {
     return node => {
         if (!(node instanceof HTMLElement) || !node.hasAttribute('style')) {
             return;
@@ -18,5 +20,5 @@ export function createAfterSanitizeAttributes(sanitizeStyle: SanitizeStyle): Dom
         } else {
             node.removeAttribute('style');
         }
-    }
+    };
 }

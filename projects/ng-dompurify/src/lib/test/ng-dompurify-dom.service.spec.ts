@@ -1,18 +1,18 @@
-import {cleanHtml, dirtyHtml} from './test-samples/html';
 import {SecurityContext} from '@angular/core';
-import {dirtyUrl, cleanUrl} from './test-samples/url';
-import {NgDompurifyDomSanitizer} from '../ng-dompurify-dom.service';
-import {SafeHtmlImplementation} from '../safe-value/safe-html-implementation';
-import {AbstractSafeValue} from '../safe-value/absctract-safe-value';
-import {SafeStyleImplementation} from '../safe-value/safe-style-implementation';
-import {SafeScriptImplementation} from '../safe-value/safe-script-implementation';
-import {SafeResourceUrlImplementation} from '../safe-value/safe-resource-url-implementation';
-import {SafeUrlImplementation} from '../safe-value/safe-url-implementation';
 import {TestBed} from '@angular/core/testing';
-import {sanitizeStyle} from './test-samples/sanitizeStyle';
-import {SANITIZE_STYLE} from '../tokens/sanitize-style';
-import {cleanStyle, dirtyStyle} from './test-samples/style';
 import {removeAllHooks} from 'dompurify';
+import {NgDompurifyDomSanitizer} from '../ng-dompurify-dom.service';
+import {AbstractSafeValue} from '../safe-value/absctract-safe-value';
+import {SafeHtmlImplementation} from '../safe-value/safe-html-implementation';
+import {SafeResourceUrlImplementation} from '../safe-value/safe-resource-url-implementation';
+import {SafeScriptImplementation} from '../safe-value/safe-script-implementation';
+import {SafeStyleImplementation} from '../safe-value/safe-style-implementation';
+import {SafeUrlImplementation} from '../safe-value/safe-url-implementation';
+import {SANITIZE_STYLE} from '../tokens/sanitize-style';
+import {cleanHtml, dirtyHtml} from './test-samples/html';
+import {sanitizeStyle} from './test-samples/sanitizeStyle';
+import {cleanStyle, dirtyStyle} from './test-samples/style';
+import {cleanUrl, dirtyUrl} from './test-samples/url';
 
 describe('NgDompurifyDomSanitizer', () => {
     let service: NgDompurifyDomSanitizer;
