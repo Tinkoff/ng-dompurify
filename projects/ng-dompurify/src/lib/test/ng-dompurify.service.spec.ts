@@ -1,18 +1,46 @@
 import {NgDompurifySanitizer} from '../ng-dompurify.service';
 import {cleanHtml, dirtyHtml} from './test-samples/html';
 import {SecurityContext} from '@angular/core';
-import {dirtyUrl, cleanUrl} from './test-samples/url';
+import {cleanUrl, dirtyUrl} from './test-samples/url';
 import {TestBed} from '@angular/core/testing';
+import {NgDompurifyHook} from '../types/ng-dompurify-hook';
+import {DOMPURIFY_HOOKS} from '../tokens/dompurify-hooks';
+import {SANITIZE_STYLE} from '../tokens/sanitize-style';
+import {sanitizeStyle} from './test-samples/sanitizeStyle';
+import {cleanStyleTag, dirtyStyleTag} from './test-samples/style';
+import {removeAllHooks} from 'dompurify';
 
 describe('NgDompurifySanitizer', () => {
+    const hooks: ReadonlyArray<NgDompurifyHook> = [{
+        name: 'beforeSanitizeAttributes',
+        hook: (node: Element) => {
+            if (node instanceof HTMLElement) {
+                node.removeAttribute('id');
+            }
+        }
+    }];
     let service: NgDompurifySanitizer;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [NgDompurifySanitizer],
+            providers: [
+                {
+                    provide: SANITIZE_STYLE,
+                    useValue: sanitizeStyle,
+                },
+                {
+                    provide: DOMPURIFY_HOOKS,
+                    useValue: hooks,
+                },
+                NgDompurifySanitizer,
+            ],
         });
 
         service = TestBed.get(NgDompurifySanitizer);
+    });
+
+    afterEach(() => {
+        removeAllHooks();
     });
 
     it('should be created', () => {
@@ -37,10 +65,43 @@ describe('NgDompurifySanitizer', () => {
         expect(sanitized).toBe(cleanUrl);
     });
 
-    it('should sanitize styles in DIV by default', () => {
-        const html = `<div style="bad">test</div>`;
-        const sanitized = service.sanitize(SecurityContext.URL, html);
+    it('should sanitize styles', () => {
+        const html = `<div style="background-image: url(evil);">test</div>`;
+        const sanitized = service.sanitize(SecurityContext.HTML, html);
 
         expect(sanitized).toBe(`<div>test</div>`);
+    });
+
+    it('should sanitize entire style tag', () => {
+        const sanitized = service.sanitize(SecurityContext.HTML, dirtyStyleTag);
+
+        expect(sanitized).toBe(cleanStyleTag);
+    });
+
+    it('hooks should work', () => {
+        const html = `<div id="test">test</div>`;
+        const sanitized = service.sanitize(SecurityContext.HTML, html);
+
+        expect(sanitized).toBe(`<div>test</div>`);
+    });
+});
+
+describe('NgDompurifySanitizer default DI', () => {
+    let service: NgDompurifySanitizer;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            providers: [NgDompurifySanitizer],
+        });
+
+        service = TestBed.get(NgDompurifySanitizer);
+    });
+
+    afterEach(() => {
+        removeAllHooks();
+    });
+
+    it('sanitizes styles into nothing by default', () => {
+        expect(service.sanitize(SecurityContext.STYLE, 'test')).toBe('');
     });
 });

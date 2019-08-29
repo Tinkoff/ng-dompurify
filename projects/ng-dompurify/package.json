@@ -2,7 +2,8 @@
     "name": "@tinkoff/ng-dompurify",
     "version": "1.0.0",
     "peerDependencies": {
-        "@angular/core": ">=4.0.0"
+        "@angular/core": ">=4.0.0",
+        "@angular/platform-browser": ">=4.0.0"
     },
     "description": "Inclusive Angular API for DOMPurify",
     "keywords": ["angular", "ng", "dompurify", "sanitizer", "DomSanitizer", "tinkoff"],

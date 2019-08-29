@@ -1,7 +1,7 @@
 import {Component, Inject, SecurityContext} from '@angular/core';
 import {DomSanitizer, SafeValue} from '@angular/platform-browser';
 
-const dirtyHtml = `<p>HELLO<iframe/\/src=JavaScript:alert&lpar;1)></ifrAMe><br>goodbye</p>`;
+const dirtyHtml = `<p style="color: red; background: expression(evil)"> HELLO <iframe/\/src=JavaScript:alert&lpar;1)></ifrAMe><br>goodbye</p>`;
 
 @Component({
     selector: 'app-pipe-example',

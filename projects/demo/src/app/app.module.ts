@@ -1,7 +1,7 @@
 import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, ɵ_sanitizeStyle} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {NgDompurifyDomSanitizer, NgDompurifyModule} from '@tinkoff/ng-dompurify';
+import {NgDompurifyDomSanitizer, NgDompurifyModule, SANITIZE_STYLE} from '@tinkoff/ng-dompurify';
 import {AppComponent} from './app.component';
 import {PipeExampleComponent} from './pipe-example/pipe-example.component';
 import {SanitizerExampleComponent} from './sanitizer-example/sanitizer-example.component';
@@ -13,6 +13,10 @@ import {SanitizerExampleComponent} from './sanitizer-example/sanitizer-example.c
         {
             provide: DomSanitizer,
             useClass: NgDompurifyDomSanitizer,
+        },
+        {
+            provide: SANITIZE_STYLE,
+            useValue: ɵ_sanitizeStyle,
         },
     ],
     bootstrap: [AppComponent],

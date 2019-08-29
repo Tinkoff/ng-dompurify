@@ -9,16 +9,30 @@ import {SafeScriptImplementation} from '../safe-value/safe-script-implementation
 import {SafeResourceUrlImplementation} from '../safe-value/safe-resource-url-implementation';
 import {SafeUrlImplementation} from '../safe-value/safe-url-implementation';
 import {TestBed} from '@angular/core/testing';
+import {sanitizeStyle} from './test-samples/sanitizeStyle';
+import {SANITIZE_STYLE} from '../tokens/sanitize-style';
+import {cleanStyle, dirtyStyle} from './test-samples/style';
+import {removeAllHooks} from 'dompurify';
 
 describe('NgDompurifyDomSanitizer', () => {
     let service: NgDompurifyDomSanitizer;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [NgDompurifyDomSanitizer],
+            providers: [
+                {
+                    provide: SANITIZE_STYLE,
+                    useValue: sanitizeStyle,
+                },
+                NgDompurifyDomSanitizer,
+            ],
         });
 
         service = TestBed.get(NgDompurifyDomSanitizer);
+    });
+
+    afterEach(() => {
+        removeAllHooks();
     });
 
     it('should be created', () => {
@@ -44,18 +58,17 @@ describe('NgDompurifyDomSanitizer', () => {
     });
 
     it('throws error by using STYLE security context', () => {
-        try {
-            service.sanitize(SecurityContext.STYLE, dirtyUrl);
-        } catch (error) {
-            expect(error).toBeTruthy();
-        }
+        const sanitized = service.sanitize(SecurityContext.STYLE, dirtyStyle);
+
+        expect(sanitized).toBe(cleanStyle);
     });
 
-    it('throws error by using SCRIPT security context', () => {
+    it('throws error by using SCRIPT security context', done => {
         try {
             service.sanitize(SecurityContext.SCRIPT, dirtyUrl);
         } catch (error) {
             expect(error).toBeTruthy();
+            done();
         }
     });
 

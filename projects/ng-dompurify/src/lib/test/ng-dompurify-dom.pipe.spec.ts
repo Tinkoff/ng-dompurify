@@ -1,75 +1,136 @@
+import {CommonModule} from '@angular/common';
+import {Component, ElementRef, SecurityContext, ViewChild} from '@angular/core';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {NgDompurifyPipe} from '../ng-dompurify.pipe';
-import {dirtyHtml, cleanHtml} from './test-samples/html';
-import {SafeHtmlImplementation} from '../safe-value/safe-html-implementation';
-import {SafeStyleImplementation} from '../safe-value/safe-style-implementation';
-import {SafeScriptImplementation} from '../safe-value/safe-script-implementation';
-import {SecurityContext} from '@angular/core';
-import {SafeUrlImplementation} from '../safe-value/safe-url-implementation';
-import {SafeResourceUrlImplementation} from '../safe-value/safe-resource-url-implementation';
-import {NgDompurifyDomSanitizer} from '../ng-dompurify-dom.service';
-import {AbstractSafeValue} from '../safe-value/absctract-safe-value';
-import {NgDompurifySanitizer} from '../ng-dompurify.service';
+import {cleanHtml, dirtyHtml} from './test-samples/html';
+import {NgDompurifyModule} from '../ng-dompurify.module';
+import {sanitizeStyle} from './test-samples/sanitizeStyle';
+import {SANITIZE_STYLE} from '../tokens/sanitize-style';
+import {cleanUrl, dirtyUrl} from './test-samples/url';
+import {removeAllHooks} from 'dompurify';
 
 describe('NgDompurifyPipe', () => {
-    const sanitizer = new NgDompurifySanitizer({});
-    const domSanitizer = new NgDompurifyDomSanitizer(sanitizer);
-    let pipe: NgDompurifyPipe;
+    @Component({
+        template: `
+            <div #element *ngIf="html" [innerHTML]="content | dompurify : context : config">test</div>
+            <div #element *ngIf="style" [style.color]="content | dompurify : context : config"></div>
+            <img #element *ngIf="url" alt="" [src]="content | dompurify : context : config">
+        `,
+    })
+    class TestComponent {
+        content = '';
+        context?: SecurityContext = SecurityContext.HTML;
+        config? = {};
+
+        @ViewChild('element', { static: false })
+        readonly element!: ElementRef<HTMLElement>;
+
+        get html(): boolean {
+            return this.context === undefined
+                || this.context === SecurityContext.HTML
+                || this.context === SecurityContext.SCRIPT
+                || this.context === SecurityContext.NONE;
+        }
+
+        get style(): boolean {
+            return this.context === SecurityContext.STYLE;
+        }
+
+        get url(): boolean {
+            return this.context === SecurityContext.URL
+                || this.context === SecurityContext.RESOURCE_URL
+        }
+    }
+
+    let fixture: ComponentFixture<TestComponent>;
+    let testComponent: TestComponent;
 
     beforeEach(() => {
-        pipe = new NgDompurifyPipe(sanitizer, domSanitizer);
+        TestBed.configureTestingModule({
+            imports: [CommonModule, NgDompurifyModule],
+            declarations: [TestComponent],
+            providers: [
+                {
+                    provide: SANITIZE_STYLE,
+                    useValue: sanitizeStyle,
+                },
+            ]
+        });
     });
 
-    it('transforms content to SafeValue with clean value', () => {
-        const safeValue = pipe.transform(dirtyHtml) as AbstractSafeValue;
-
-        expect(safeValue.safeValue).toBe(cleanHtml);
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestComponent);
+        testComponent = fixture.componentInstance;
+        fixture.detectChanges();
     });
 
-    it('transforms content to SafeHTML', () => {
-        const safeHTML = pipe.transform(dirtyHtml) as SafeHtmlImplementation;
-
-        expect(safeHTML.getTypeName()).toBe('HTML');
+    afterEach(() => {
+        removeAllHooks();
     });
 
-    it('transforms content to SafeStyle', () => {
-        const safeStyle = pipe.transform(
-            `test content`,
-            SecurityContext.STYLE,
-        ) as SafeStyleImplementation;
+    it('sanitizes HTML', () => {
+        testComponent.content = dirtyHtml;
+        fixture.detectChanges();
 
-        expect(safeStyle.getTypeName()).toBe('Style');
+        expect(testComponent.element.nativeElement.innerHTML).toBe(cleanHtml);
     });
 
-    it('transforms content to SafeScript', () => {
-        const safeScript = pipe.transform(
-            `test content`,
-            SecurityContext.SCRIPT,
-        ) as SafeScriptImplementation;
+    it('sanitizes HTML by default', () => {
+        testComponent.content = dirtyHtml;
+        testComponent.context = undefined;
+        testComponent.config = undefined;
+        fixture.detectChanges();
 
-        expect(safeScript.getTypeName()).toBe('Script');
+        expect(testComponent.element.nativeElement.innerHTML).toBe(cleanHtml);
     });
 
-    it('transforms content to SafeURL', () => {
-        const safeURL = pipe.transform(
-            `test content`,
-            SecurityContext.URL,
-        ) as SafeUrlImplementation;
+    it('sanitizes HTML with config', () => {
+        testComponent.content = dirtyHtml;
+        testComponent.config = {FORBID_TAGS: ['br']};
+        fixture.detectChanges();
 
-        expect(safeURL.getTypeName()).toBe('URL');
+        expect(testComponent.element.nativeElement.innerHTML).toBe(cleanHtml.replace('<br>', ''));
     });
 
-    it('transforms content to SafeResourceURL', () => {
-        const safeResourceUrl = pipe.transform(
-            `test content`,
-            SecurityContext.RESOURCE_URL,
-        ) as SafeResourceUrlImplementation;
+    it('sanitizes URL', () => {
+        testComponent.content = dirtyUrl;
+        testComponent.context = SecurityContext.URL;
+        fixture.detectChanges();
 
-        expect(safeResourceUrl.getTypeName()).toBe('ResourceURL');
+        expect(testComponent.element.nativeElement.getAttribute('src')).toBe(cleanUrl);
     });
 
-    it('transforms content to null by incorrect or NONE context', () => {
-        const result = pipe.transform(`test content`, SecurityContext.NONE);
+    it('sanitizes RESOURCE URL', () => {
+        testComponent.content = dirtyUrl;
+        testComponent.context = SecurityContext.RESOURCE_URL;
+        fixture.detectChanges();
 
-        expect(result).toBeNull();
+        expect(testComponent.element.nativeElement.getAttribute('src')).toBe(cleanUrl);
+    });
+
+    it('sanitizes STYLE', () => {
+        testComponent.content = 'some style';
+        testComponent.context = SecurityContext.STYLE;
+        fixture.detectChanges();
+
+        expect(testComponent.element.nativeElement.getAttribute('style')).toBe(null);
+    });
+
+    it('throws error by using SCRIPT security context', done => {
+        try {
+            testComponent.context = SecurityContext.SCRIPT;
+            fixture.detectChanges();
+        } catch (error) {
+            expect(error).toBeTruthy();
+            done();
+        }
+    });
+
+    it('clears content when used with NONE context', () => {
+        testComponent.content = dirtyHtml;
+        testComponent.context = SecurityContext.NONE;
+        fixture.detectChanges();
+
+        expect(testComponent.element.nativeElement.innerHTML).toBe('');
     });
 });
