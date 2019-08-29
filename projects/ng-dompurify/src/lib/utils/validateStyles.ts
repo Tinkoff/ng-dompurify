@@ -3,8 +3,6 @@ import {SanitizeStyle} from '../types/sanitize-style';
 /**
  *  Take CSS property-value pairs and validate them through provided method,
  *  then add the styles to an array of property-value pairs
- *
- *  @private
  */
 export function validateStyles(styles: CSSStyleDeclaration, sanitizeStyle: SanitizeStyle): ReadonlyArray<string> {
     const output: string[] = [];

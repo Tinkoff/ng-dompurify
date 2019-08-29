@@ -4,8 +4,6 @@ import {addCSSRules} from './addCSSRules';
 
 /**
  * uponSanitizeElementHook factory to sanitize CSS rules from HTMLStyleElement through custom function
- *
- * @private
  */
 export function createUponSanitizeElementHook(sanitizeStyle: SanitizeStyle): DompurifyHook {
     return node => {

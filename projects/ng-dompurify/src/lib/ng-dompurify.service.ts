@@ -1,5 +1,5 @@
-import {inject, Inject, Injectable, Sanitizer, SecurityContext} from '@angular/core';
-import {sanitize, addHook, HookName} from 'dompurify';
+import {Inject, Injectable, Sanitizer, SecurityContext} from '@angular/core';
+import {sanitize, addHook, removeAllHooks} from 'dompurify';
 import {SANITIZE_STYLE} from './tokens/sanitize-style';
 import {DOMPURIFY_HOOKS} from './tokens/dompurify-hooks';
 import {DOMPURIFY_CONFIG} from './tokens/dompurify-config';

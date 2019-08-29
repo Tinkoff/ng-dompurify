@@ -12,6 +12,7 @@ import {TestBed} from '@angular/core/testing';
 import {sanitizeStyle} from './test-samples/sanitizeStyle';
 import {SANITIZE_STYLE} from '../tokens/sanitize-style';
 import {cleanStyle, dirtyStyle} from './test-samples/style';
+import {removeAllHooks} from 'dompurify';
 
 describe('NgDompurifyDomSanitizer', () => {
     let service: NgDompurifyDomSanitizer;
@@ -19,11 +20,11 @@ describe('NgDompurifyDomSanitizer', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                NgDompurifyDomSanitizer,
                 {
                     provide: SANITIZE_STYLE,
                     useValue: sanitizeStyle,
                 },
+                NgDompurifyDomSanitizer,
             ],
         });
 
@@ -31,7 +32,7 @@ describe('NgDompurifyDomSanitizer', () => {
     });
 
     afterEach(() => {
-        TestBed.resetTestingModule();
+        removeAllHooks();
     });
 
     it('should be created', () => {

@@ -4,8 +4,6 @@ import {validateStyles} from './validateStyles';
 
 /**
  * afterSanitizeAttributes factory to sanitize CSS rules from inline styles through custom function
- *
- * @private
  */
 export function createAfterSanitizeAttributes(sanitizeStyle: SanitizeStyle): DompurifyHook {
     return node => {

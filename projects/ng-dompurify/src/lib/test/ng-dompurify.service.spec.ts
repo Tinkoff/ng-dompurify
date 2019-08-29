@@ -8,6 +8,7 @@ import {DOMPURIFY_HOOKS} from '../tokens/dompurify-hooks';
 import {SANITIZE_STYLE} from '../tokens/sanitize-style';
 import {sanitizeStyle} from './test-samples/sanitizeStyle';
 import {cleanStyleTag, dirtyStyleTag} from './test-samples/style';
+import {removeAllHooks} from 'dompurify';
 
 describe('NgDompurifySanitizer', () => {
     const hooks: ReadonlyArray<NgDompurifyHook> = [{
@@ -23,7 +24,6 @@ describe('NgDompurifySanitizer', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                NgDompurifySanitizer,
                 {
                     provide: SANITIZE_STYLE,
                     useValue: sanitizeStyle,
@@ -31,7 +31,8 @@ describe('NgDompurifySanitizer', () => {
                 {
                     provide: DOMPURIFY_HOOKS,
                     useValue: hooks,
-                }
+                },
+                NgDompurifySanitizer,
             ],
         });
 
@@ -39,7 +40,7 @@ describe('NgDompurifySanitizer', () => {
     });
 
     afterEach(() => {
-        TestBed.resetTestingModule();
+        removeAllHooks();
     });
 
     it('should be created', () => {
@@ -97,7 +98,7 @@ describe('NgDompurifySanitizer default DI', () => {
     });
 
     afterEach(() => {
-        TestBed.resetTestingModule();
+        removeAllHooks();
     });
 
     it('sanitizes styles into nothing by default', () => {

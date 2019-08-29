@@ -7,6 +7,7 @@ import {NgDompurifyModule} from '../ng-dompurify.module';
 import {sanitizeStyle} from './test-samples/sanitizeStyle';
 import {SANITIZE_STYLE} from '../tokens/sanitize-style';
 import {cleanUrl, dirtyUrl} from './test-samples/url';
+import {removeAllHooks} from 'dompurify';
 
 describe('NgDompurifyPipe', () => {
     @Component({
@@ -18,14 +19,15 @@ describe('NgDompurifyPipe', () => {
     })
     class TestComponent {
         content = '';
-        context = SecurityContext.HTML;
-        config = {};
+        context?: SecurityContext = SecurityContext.HTML;
+        config? = {};
 
         @ViewChild('element', { static: false })
         readonly element!: ElementRef<HTMLElement>;
 
         get html(): boolean {
-            return this.context === SecurityContext.HTML
+            return this.context === undefined
+                || this.context === SecurityContext.HTML
                 || this.context === SecurityContext.SCRIPT
                 || this.context === SecurityContext.NONE;
         }
@@ -63,11 +65,20 @@ describe('NgDompurifyPipe', () => {
     });
 
     afterEach(() => {
-        TestBed.resetTestingModule();
+        removeAllHooks();
     });
 
     it('sanitizes HTML', () => {
         testComponent.content = dirtyHtml;
+        fixture.detectChanges();
+
+        expect(testComponent.element.nativeElement.innerHTML).toBe(cleanHtml);
+    });
+
+    it('sanitizes HTML by default', () => {
+        testComponent.content = dirtyHtml;
+        testComponent.context = undefined;
+        testComponent.config = undefined;
         fixture.detectChanges();
 
         expect(testComponent.element.nativeElement.innerHTML).toBe(cleanHtml);
