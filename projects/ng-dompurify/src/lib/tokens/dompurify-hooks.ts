@@ -1,8 +1,5 @@
-import {inject, InjectionToken} from '@angular/core';
-import {SANITIZE_STYLE} from './sanitize-style';
+import {InjectionToken} from '@angular/core';
 import {NgDompurifyHook} from '../types/ng-dompurify-hook';
-import {createUponSanitizeElementHook} from '../utils/createUponSanitizeElementHook';
-import {createAfterSanitizeAttributes} from '../utils/createAfterSanitizeAttributes';
 
 /**
  * Token for adding hooks to DOMPurify, see {@link addHook}

@@ -1,7 +1,7 @@
 import {Pipe, PipeTransform, SecurityContext} from '@angular/core';
 import {DomSanitizer, SafeValue} from '@angular/platform-browser';
-import {NgDompurifyConfig} from './types/ng-dompurify-config';
 import {NgDompurifySanitizer} from './ng-dompurify.service';
+import {NgDompurifyConfig} from './types/ng-dompurify-config';
 
 /**
  * Pipe that transforms dirty content to clean via {@link NgDompurifySanitizer}

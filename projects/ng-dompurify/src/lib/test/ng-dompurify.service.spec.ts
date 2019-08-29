@@ -1,24 +1,26 @@
-import {NgDompurifySanitizer} from '../ng-dompurify.service';
-import {cleanHtml, dirtyHtml} from './test-samples/html';
 import {SecurityContext} from '@angular/core';
-import {cleanUrl, dirtyUrl} from './test-samples/url';
 import {TestBed} from '@angular/core/testing';
-import {NgDompurifyHook} from '../types/ng-dompurify-hook';
+import {removeAllHooks} from 'dompurify';
+import {NgDompurifySanitizer} from '../ng-dompurify.service';
 import {DOMPURIFY_HOOKS} from '../tokens/dompurify-hooks';
 import {SANITIZE_STYLE} from '../tokens/sanitize-style';
+import {NgDompurifyHook} from '../types/ng-dompurify-hook';
+import {cleanHtml, dirtyHtml} from './test-samples/html';
 import {sanitizeStyle} from './test-samples/sanitizeStyle';
 import {cleanStyleTag, dirtyStyleTag} from './test-samples/style';
-import {removeAllHooks} from 'dompurify';
+import {cleanUrl, dirtyUrl} from './test-samples/url';
 
 describe('NgDompurifySanitizer', () => {
-    const hooks: ReadonlyArray<NgDompurifyHook> = [{
-        name: 'beforeSanitizeAttributes',
-        hook: (node: Element) => {
-            if (node instanceof HTMLElement) {
-                node.removeAttribute('id');
-            }
-        }
-    }];
+    const hooks: ReadonlyArray<NgDompurifyHook> = [
+        {
+            name: 'beforeSanitizeAttributes',
+            hook: (node: Element) => {
+                if (node instanceof HTMLElement) {
+                    node.removeAttribute('id');
+                }
+            },
+        },
+    ];
     let service: NgDompurifySanitizer;
 
     beforeEach(() => {
