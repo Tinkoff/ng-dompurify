@@ -1,6 +1,6 @@
 {
     "name": "@tinkoff/ng-dompurify",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
@@ -11,7 +11,11 @@
         "test:watch": "ng run ng-dompurify:test --browsers ChromeHeadless --watch=true --code-coverage",
         "coveralls": "cat coverage/ng-dompurify/lcov.info | coveralls",
         "lint": "ng lint",
-        "typecheck": "tsc --noEmit --skipLibCheck"
+        "typecheck": "tsc --noEmit --skipLibCheck",
+        "release": "standard-version",
+        "release:patch": "npm run release -- --release-as patch",
+        "release:minor": "npm run release -- --release-as minor",
+        "release:major": "npm run release -- --release-as major"
     },
     "description": "Inclusive angular api for dompurify",
     "keywords": ["angular", "ng", "dompurify", "DomSanitizer", "tinkoff"],
@@ -58,6 +62,7 @@
         "lint-staged": "^9.2.1",
         "ng-packagr": "^5.4.3",
         "prettier": "^1.18.2",
+        "standard-version": "^7.0.0",
         "ts-node": "^8.3.0",
         "tsickle": "^0.36.0",
         "tslint": "^5.18.0",
