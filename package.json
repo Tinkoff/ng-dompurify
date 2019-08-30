@@ -16,10 +16,9 @@
         "release:patch": "npm run release -- --release-as patch",
         "release:minor": "npm run release -- --release-as minor",
         "release:major": "npm run release -- --release-as major",
-        "postrelease": "node scripts/syncVersions.js",
         "publish": "npm run build && npm publish ./dist/ng-dompurify"
     },
-    "description": "Inclusive angular api for dompurify",
+    "description": "Inclusive Angular API for DOMPurify",
     "keywords": ["angular", "ng", "dompurify", "DomSanitizer", "tinkoff"],
     "license": "Apache-2.0",
     "authors": ["Roman Sedov <r.sedov@tinkoff.ru>", "Alex Inkin <a.inkin@tinkoff.ru>"],
@@ -78,5 +77,10 @@
     "lint-staged": {
         "*.{js,ts,html,md,less,json}": ["prettier --write", "git add"],
         "*.ts": "tslint"
+    },
+    "standard-version": {
+        "scripts": {
+            "postbump": "node scripts/syncVersions.js && git add **/package.json && git add **/package-lock.json"
+        }
     }
 }
