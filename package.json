@@ -15,7 +15,9 @@
         "release": "standard-version",
         "release:patch": "npm run release -- --release-as patch",
         "release:minor": "npm run release -- --release-as minor",
-        "release:major": "npm run release -- --release-as major"
+        "release:major": "npm run release -- --release-as major",
+        "postrelease": "node scripts/syncVersions.js",
+        "publish": "npm run build && npm publish ./dist/ng-dompurify"
     },
     "description": "Inclusive angular api for dompurify",
     "keywords": ["angular", "ng", "dompurify", "DomSanitizer", "tinkoff"],
