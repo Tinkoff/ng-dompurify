@@ -1,6 +1,6 @@
 {
     "name": "@tinkoff/ng-dompurify",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
@@ -19,9 +19,18 @@
         "publish": "npm run build && npm publish ./dist/ng-dompurify"
     },
     "description": "Inclusive Angular API for DOMPurify",
-    "keywords": ["angular", "ng", "dompurify", "DomSanitizer", "tinkoff"],
+    "keywords": [
+        "angular",
+        "ng",
+        "dompurify",
+        "DomSanitizer",
+        "tinkoff"
+    ],
     "license": "Apache-2.0",
-    "authors": ["Roman Sedov <r.sedov@tinkoff.ru>", "Alex Inkin <a.inkin@tinkoff.ru>"],
+    "authors": [
+        "Roman Sedov <r.sedov@tinkoff.ru>",
+        "Alex Inkin <a.inkin@tinkoff.ru>"
+    ],
     "repository": "https://github.com/TinkoffCreditSystems/ng-dompurify",
     "bugs": "https://github.com/TinkoffCreditSystems/ng-dompurify/issues",
     "homepage": "https://github.com/TinkoffCreditSystems/ng-dompurify#README",
@@ -75,12 +84,15 @@
         }
     },
     "lint-staged": {
-        "*.{js,ts,html,md,less,json}": ["prettier --write", "git add"],
+        "*.{js,ts,html,md,less,json}": [
+            "prettier --write",
+            "git add"
+        ],
         "*.ts": "tslint"
     },
     "standard-version": {
         "scripts": {
-            "postbump": "node scripts/syncVersions.js && git add **/package.json && git add **/package-lock.json"
+            "postbump": "node scripts/syncVersions.js"
         }
     }
 }
