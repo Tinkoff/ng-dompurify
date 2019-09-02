@@ -1,10 +1,10 @@
 import {InjectionToken} from '@angular/core';
-import {NgDompurifyHook} from '../types/ng-dompurify-hook';
+import {NgDompurifyHooks} from '../types/ng-dompurify-hooks';
 
 /**
  * Token for adding hooks to DOMPurify, see {@link addHook}
  */
-export const DOMPURIFY_HOOKS = new InjectionToken<ReadonlyArray<NgDompurifyHook>>(
+export const DOMPURIFY_HOOKS: InjectionToken<NgDompurifyHooks> = new InjectionToken<NgDompurifyHooks>(
     'Hooks for DOMPurify',
     {
         factory: () => [],
