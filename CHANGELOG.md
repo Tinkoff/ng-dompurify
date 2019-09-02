@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.2](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v1.1.0...v1.1.2) (2019-09-02)
+
+
+### Bug Fixes
+
+* **types:** preserve ReadonlyArray in compiled code to support older TypeScript versions ([387e87b](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/387e87b))
+* **types:** preserve ReadonlyArray in compiled code to support older TypeScript versions ([180e0dd](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/180e0dd))
+
 ## [1.1.0](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v1.0.0...v1.1.0) (2019-08-30)
 
 ### Features
