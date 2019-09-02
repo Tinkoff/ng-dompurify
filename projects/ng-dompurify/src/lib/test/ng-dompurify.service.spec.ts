@@ -4,14 +4,14 @@ import {removeAllHooks} from 'dompurify';
 import {NgDompurifySanitizer} from '../ng-dompurify.service';
 import {DOMPURIFY_HOOKS} from '../tokens/dompurify-hooks';
 import {SANITIZE_STYLE} from '../tokens/sanitize-style';
-import {NgDompurifyHooks} from '../types/ng-dompurify-hooks';
+import {NgDompurifyHook} from '../types/ng-dompurify-hook';
 import {cleanHtml, dirtyHtml} from './test-samples/html';
 import {sanitizeStyle} from './test-samples/sanitizeStyle';
 import {cleanStyleTag, dirtyStyleTag} from './test-samples/style';
 import {cleanUrl, dirtyUrl} from './test-samples/url';
 
 describe('NgDompurifySanitizer', () => {
-    const hooks: NgDompurifyHooks = [
+    const hooks: ReadonlyArray<NgDompurifyHook> = [
         {
             name: 'beforeSanitizeAttributes',
             hook: (node: Element) => {
