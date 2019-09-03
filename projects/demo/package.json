@@ -1,0 +1,35 @@
+{
+    "name": "@tinkoff/ng-dompurify-demo",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "ng": "ng",
+        "start": "ng serve",
+        "build": "ng build",
+        "lint": "ng lint"
+    },
+    "dependencies": {
+        "@angular/common": "8.2.0",
+        "@angular/compiler": "8.2.0",
+        "@angular/core": "8.2.0",
+        "@angular/forms": "8.2.0",
+        "@angular/platform-browser": "8.2.0",
+        "@angular/platform-browser-dynamic": "8.2.0",
+        "@angular/router": "8.2.0",
+        "@tinkoff/ng-dompurify": "latest",
+        "core-js": "2.6.9",
+        "dompurify": "^1.0.11",
+        "rxjs": "6.5.2",
+        "zone.js": "0.9.1"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "~0.10.0",
+        "@angular/cli": "~7.0.2",
+        "@angular/compiler-cli": "~7.0.0",
+        "@angular/language-service": "~7.0.0",
+        "@types/node": "~8.9.4",
+        "ts-node": "~7.0.0",
+        "tslint": "~5.11.0",
+        "typescript": "~3.1.1"
+    }
+}
