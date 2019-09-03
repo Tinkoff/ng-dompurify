@@ -8,10 +8,12 @@ platformBrowserDynamic()
     .bootstrapModule(AppModule)
     .then(ref => {
         // Ensure Angular destroys itself on hot reloads for Stackblitz
-        if (window['ngRef']) {
-            window['ngRef'].destroy();
+        const windowRef: any = window;
+
+        if (windowRef['ngRef']) {
+            windowRef['ngRef'].destroy();
         }
 
-        window['ngRef'] = ref;
+        windowRef['ngRef'] = ref;
     })
     .catch(err => console.error(err));

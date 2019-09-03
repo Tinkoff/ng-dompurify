@@ -52,21 +52,12 @@
                         "polyfills": "projects/demo/src/polyfills.ts",
                         "tsConfig": "projects/demo/tsconfig.json",
                         "aot": false,
-                        "assets": [
-                            "projects/demo/src/favicon.ico",
-                            "projects/demo/src/assets"
-                        ],
+                        "assets": [],
                         "styles": ["projects/demo/src/styles.css"],
                         "scripts": []
                     },
                     "configurations": {
                         "production": {
-                            "fileReplacements": [
-                                {
-                                    "replace": "projects/demo/src/environments/environment.ts",
-                                    "with": "projects/demo/src/environments/environment.prod.ts"
-                                }
-                            ],
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
@@ -83,13 +74,16 @@
                                     "maximumError": "5mb"
                                 }
                             ]
+                        },
+                        "serve": {
+                            "tsConfig": "tsconfig.json"
                         }
                     }
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "demo:build"
+                        "browserTarget": "demo:build:serve"
                     },
                     "configurations": {
                         "production": {
