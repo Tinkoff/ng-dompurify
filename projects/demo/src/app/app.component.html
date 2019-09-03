@@ -3,5 +3,23 @@
     <code>ɵ_sanitizeStyle</code> from <code>'@angular/core'</code> as
     <code>SANITIZE_STYLE</code>.
 </p>
-<app-pipe-example></app-pipe-example>
-<app-sanitizer-example></app-sanitizer-example>
+<h1>
+    Pipe
+</h1>
+<section>
+    <label>
+        Enter HTML here:
+        <textarea [(ngModel)]="value"></textarea>
+    </label>
+    <h2>Resulting value processed through pipe:</h2>
+    <blockquote [textContent]="unwrap(value | dompurify)"></blockquote>
+</section>
+<h1>DOM</h1>
+<section>
+    <label>
+        Enter HTML here:
+        <textarea [(ngModel)]="domValue"></textarea>
+    </label>
+    <h2>Resulting HTML sanitized by DomSanitizer:</h2>
+    <div [innerHtml]="domValue"></div>
+</section>
