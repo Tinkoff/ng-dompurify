@@ -50,7 +50,7 @@
                         "index": "projects/demo/src/index.html",
                         "main": "projects/demo/src/main.ts",
                         "polyfills": "projects/demo/src/polyfills.ts",
-                        "tsConfig": "projects/demo/tsconfig.json",
+                        "tsConfig": "tsconfig.json",
                         "aot": false,
                         "assets": [],
                         "styles": ["projects/demo/src/styles.css"],
