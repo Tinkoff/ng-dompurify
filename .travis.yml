@@ -6,3 +6,5 @@ script:
   - npm run build
   - npm run test:ci
   - npm run build:demo
+notifications:
+  webhooks: https://coveralls.io/webhook
