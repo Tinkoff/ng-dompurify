@@ -2,12 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.4](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v1.1.1...v1.1.4) (2019-09-09)
+
+### Features
+
+- **package-json:** update peer dependencies
+
 ### [1.1.3](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v1.1.1...v1.1.3) (2019-09-02)
 
-
-### Bug Fixes
-
-* **dependencies:** make compatible with Angular 7 ([7b3963a](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/7b3963a))
 
 ### [1.1.2](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v1.1.1...v1.1.2) (2019-09-02)
 
