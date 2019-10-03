@@ -20,6 +20,37 @@ $ npm install @tinkoff/ng-dompurify
 Either use pipe to sanitize your content when binding to `[innerHTML]`
 or use `NgDompurifySanitizer` service manually.
 
+```typescript
+import {NgDompurifyModule} from '@tinkoff/ng-dompurify';
+
+@NgModule({
+    imports: [NgDompurifyModule],
+})
+export class MyModule {}
+```
+
+As a pipe:
+
+```html
+<div [innerHtml]="value | dompurify"></div>
+```
+
+As a service:
+
+```typescript
+import {SecurityContext} from '@angular/core';
+import {NgDompurifySanitizer} from '@tinkoff/ng-dompurify';
+
+@Component({})
+export class MyComponent {
+    constructor(private readonly dompurifySanitizer: NgDompurifySanitizer) {}
+
+    purify(value: string): string {
+        return this.dompurifySanitizer.sanitize(SecurityContext.HTML, value);
+    }
+}
+```
+
 You can also substitute entire Angular `DomSanitizer` with `DOMPurify`:
 
 ```typescript
@@ -147,4 +178,4 @@ export class AppModule {}
 ## Demo
 
 You can see live demo here:
-https://stackblitz.com/edit/ng-dompurify-demo
+https://stackblitz.com/github/TinkoffCreditSystems/ng-dompurify/tree/master/projects/demo
