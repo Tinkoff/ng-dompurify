@@ -34,13 +34,13 @@ export class NgDompurifySanitizer extends Sanitizer {
         private readonly config: NgDompurifyConfig,
         @Inject(SANITIZE_STYLE)
         private readonly sanitizeStyle: SanitizeStyle,
-        @Inject(DOCUMENT) {defaultView = undefined}: Document,
+        @Inject(DOCUMENT) {defaultView}: Document,
         @Inject(DOMPURIFY_HOOKS)
         hooks: ReadonlyArray<NgDompurifyHook>,
     ) {
         super();
 
-        this.domPurify = createDOMPurify(defaultView);
+        this.domPurify = createDOMPurify(defaultView as Window);
         this.domPurify.addHook(
             'uponSanitizeElement',
             createUponSanitizeElementHook(this.sanitizeStyle),
