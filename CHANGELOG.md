@@ -4,11 +4,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.0.0](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v1.1.1...v2.0.0) (2019-11-05)
 
-### Bug Fixes
-
--   **dependencies:** make compatible with Angular 7 ([7b3963a](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/7b3963a))
--   **dependencies:** set dependencies to be backwards compatible with Angular 6-7 ([906b61d](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/906b61d))
-
 ### Features
 
 -   **ssr:** support server side environment and update to DOMPurify 2+ ([#30](https://github.com/TinkoffCreditSystems/ng-dompurify/issues/30)) ([65ea43d](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/65ea43d))
@@ -20,6 +15,10 @@ All notable changes to this project will be documented in this file. See [standa
 -   **package-json:** update peer dependencies
 
 ### [1.1.3](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v1.1.1...v1.1.3) (2019-09-02)
+
+### Bug Fixes
+
+-   **dependencies:** set dependencies to be backwards compatible with Angular 6-7 ([906b61d](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/906b61d))
 
 ### [1.1.2](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v1.1.1...v1.1.2) (2019-09-02)
 
