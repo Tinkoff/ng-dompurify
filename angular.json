@@ -7,7 +7,6 @@
             "projectType": "library",
             "root": "projects/ng-dompurify",
             "sourceRoot": "projects/ng-dompurify/src",
-            "prefix": "lib",
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-ng-packagr:build",
@@ -21,7 +20,9 @@
                     "options": {
                         "main": "projects/ng-dompurify/src/test.ts",
                         "tsConfig": "projects/ng-dompurify/tsconfig.spec.json",
-                        "karmaConfig": "projects/ng-dompurify/karma.conf.js"
+                        "karmaConfig": "projects/ng-dompurify/karma.conf.js",
+                        "codeCoverage": true,
+                        "browsers": "ChromeHeadless"
                     }
                 },
                 "lint": {
