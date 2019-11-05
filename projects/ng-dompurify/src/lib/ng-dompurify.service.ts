@@ -1,6 +1,7 @@
 import {DOCUMENT} from '@angular/common';
 import {Inject, Injectable, Sanitizer, SecurityContext} from '@angular/core';
-import * as dompurifyFactory from 'dompurify';
+import * as dompurify from 'dompurify';
+import {DOMPurifyI} from 'dompurify';
 import {DOMPURIFY_CONFIG} from './tokens/dompurify-config';
 import {DOMPURIFY_HOOKS} from './tokens/dompurify-hooks';
 import {SANITIZE_STYLE} from './tokens/sanitize-style';
@@ -10,7 +11,7 @@ import {SanitizeStyle} from './types/sanitize-style';
 import {createAfterSanitizeAttributes} from './utils/createAfterSanitizeAttributes';
 import {createUponSanitizeElementHook} from './utils/createUponSanitizeElementHook';
 
-const createDOMPurify = dompurifyFactory;
+const createDOMPurify = dompurify;
 
 /**
  * Implementation of Angular {@link Sanitizer} purifying via DOMPurify
@@ -26,22 +27,20 @@ const createDOMPurify = dompurifyFactory;
     providedIn: 'root',
 })
 export class NgDompurifySanitizer extends Sanitizer {
-    private readonly domPurify = createDOMPurify(
-        this.documentRef.defaultView || undefined,
-    );
+    private readonly domPurify: DOMPurifyI;
 
     constructor(
         @Inject(DOMPURIFY_CONFIG)
         private readonly config: NgDompurifyConfig,
         @Inject(SANITIZE_STYLE)
         private readonly sanitizeStyle: SanitizeStyle,
-        @Inject(DOCUMENT)
-        private readonly documentRef: Document,
+        @Inject(DOCUMENT) {defaultView = undefined}: Document,
         @Inject(DOMPURIFY_HOOKS)
         hooks: ReadonlyArray<NgDompurifyHook>,
     ) {
         super();
 
+        this.domPurify = createDOMPurify(defaultView);
         this.domPurify.addHook(
             'uponSanitizeElement',
             createUponSanitizeElementHook(this.sanitizeStyle),
