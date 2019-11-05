@@ -1,6 +1,6 @@
 import {DOCUMENT} from '@angular/common';
 import {Inject, Injectable, Sanitizer, SecurityContext} from '@angular/core';
-import * as createDOMPurify from 'dompurify';
+import * as dompurifyFactory from 'dompurify';
 import {DOMPURIFY_CONFIG} from './tokens/dompurify-config';
 import {DOMPURIFY_HOOKS} from './tokens/dompurify-hooks';
 import {SANITIZE_STYLE} from './tokens/sanitize-style';
@@ -9,6 +9,8 @@ import {NgDompurifyHook} from './types/ng-dompurify-hook';
 import {SanitizeStyle} from './types/sanitize-style';
 import {createAfterSanitizeAttributes} from './utils/createAfterSanitizeAttributes';
 import {createUponSanitizeElementHook} from './utils/createUponSanitizeElementHook';
+
+const createDOMPurify = dompurifyFactory;
 
 /**
  * Implementation of Angular {@link Sanitizer} purifying via DOMPurify
