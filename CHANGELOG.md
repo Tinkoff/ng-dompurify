@@ -2,28 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v1.1.1...v2.0.0) (2019-11-05)
+
+### Features
+
+-   **ssr:** support server side environment and update to DOMPurify 2+ ([#30](https://github.com/TinkoffCreditSystems/ng-dompurify/issues/30)) ([65ea43d](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/65ea43d))
+
 ### [1.1.4](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v1.1.1...v1.1.4) (2019-09-09)
 
 ### Features
 
-- **package-json:** update peer dependencies
+-   **package-json:** update peer dependencies
 
 ### [1.1.3](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v1.1.1...v1.1.3) (2019-09-02)
 
+### Bug Fixes
+
+-   **dependencies:** set dependencies to be backwards compatible with Angular 6-7 ([906b61d](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/906b61d))
 
 ### [1.1.2](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v1.1.1...v1.1.2) (2019-09-02)
 
-
 ### Bug Fixes
 
-* **dependencies:** make compatible with Angular 7 ([7b3963a](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/7b3963a))
+-   **dependencies:** make compatible with Angular 7 ([7b3963a](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/7b3963a))
 
 ### [1.1.1](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v1.1.0...v1.1.1) (2019-09-02)
 
-
 ### Bug Fixes
 
-* **types:** preserve ReadonlyArray in compiled code to support older TypeScript versions ([387e87b](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/387e87b))
+-   **types:** preserve ReadonlyArray in compiled code to support older TypeScript versions ([387e87b](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/387e87b))
 
 ## [1.1.0](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v1.0.0...v1.1.0) (2019-08-30)
 
