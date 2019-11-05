@@ -1,3 +1,3 @@
-import {SanitizeStyle} from "../../types/sanitize-style";
+import {SanitizeStyle} from '../../types/sanitize-style';
 
-export const sanitizeStyle: SanitizeStyle = style => style.includes('(') ? '' : style;
+export const sanitizeStyle: SanitizeStyle = style => (style.includes('(') ? '' : style);
