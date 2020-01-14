@@ -1,6 +1,6 @@
 # NgDompurify
 
-[![Build](https://img.shields.io/travis/TinkoffCreditSystems/ng-dompurify.svg?branch=master&style=flat-square)](https://travis-ci.org/TinkoffCreditSystems/ng-dompurify)
+[![Build](https://img.shields.io/travis/TinkoffCreditSystems/ng-dompurify/master?style=flat-square)](https://travis-ci.org/TinkoffCreditSystems/ng-dompurify)
 [![Coverage Status](https://img.shields.io/coveralls/github/TinkoffCreditSystems/ng-dompurify?branch=master&style=flat-square)](https://coveralls.io/github/TinkoffCreditSystems/ng-dompurify?branch=master)
 [![npm version](https://img.shields.io/npm/v/@tinkoff/ng-dompurify.svg?style=flat-square)](https://npmjs.com/package/@tinkoff/ng-dompurify)
 [![code style: @tinkoff/linters](https://img.shields.io/badge/code%20style-%40tinkoff%2Flinters-blue?style=flat-square)](https://github.com/TinkoffCreditSystems/linters)
@@ -12,7 +12,14 @@
 ## Install
 
 ```
-$ npm install @tinkoff/ng-dompurify
+npm install @tinkoff/ng-dompurify
+```
+
+If you do not have `dompurify` in your package, install also:
+
+```
+npm install dompurify
+npm install --save-dev @types/dompurify
 ```
 
 ## How to use
