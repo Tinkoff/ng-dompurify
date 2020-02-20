@@ -9,8 +9,15 @@ export function createUponSanitizeElementHook(
     sanitizeStyle: SanitizeStyle,
 ): DompurifyHook {
     return node => {
-        if (node instanceof HTMLStyleElement && node.sheet instanceof CSSStyleSheet) {
-            node.textContent = addCSSRules(node.sheet.cssRules, sanitizeStyle).join('\n');
+        if (node instanceof HTMLStyleElement || node instanceof SVGStyleElement) {
+            // https://github.com/microsoft/TypeScript/issues/36896
+            const {sheet} = node as HTMLStyleElement;
+
+            if (sheet instanceof CSSStyleSheet) {
+                node.textContent = addCSSRules(sheet.cssRules, sanitizeStyle).join('\n');
+            } else {
+                node.textContent = '';
+            }
         }
     };
 }
