@@ -5,6 +5,7 @@ import {NgDompurifySanitizer} from '../ng-dompurify.service';
 import {DOMPURIFY_HOOKS} from '../tokens/dompurify-hooks';
 import {SANITIZE_STYLE} from '../tokens/sanitize-style';
 import {NgDompurifyHook} from '../types/ng-dompurify-hook';
+import {createUponSanitizeElementHook} from '../utils/createUponSanitizeElementHook';
 import {cleanHtml, dirtyHtml} from './test-samples/html';
 import {sanitizeStyle} from './test-samples/sanitizeStyle';
 import {cleanStyleTag, dirtyStyleTag} from './test-samples/style';
@@ -85,6 +86,16 @@ describe('NgDompurifySanitizer', () => {
         const sanitized = service.sanitize(SecurityContext.HTML, html);
 
         expect(sanitized).toBe(`<div>test</div>`);
+    });
+
+    it('clears style when sheet is not available', () => {
+        const style = document.createElement('STYLE');
+        const hook = createUponSanitizeElementHook(v => v);
+
+        style.textContent = 'hapica';
+        hook(style, null, {});
+
+        expect(style.textContent).toBe('');
     });
 });
 

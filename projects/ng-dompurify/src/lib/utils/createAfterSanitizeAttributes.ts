@@ -9,7 +9,10 @@ export function createAfterSanitizeAttributes(
     sanitizeStyle: SanitizeStyle,
 ): DompurifyHook {
     return node => {
-        if (!(node instanceof HTMLElement) || !node.hasAttribute('style')) {
+        if (
+            (!(node instanceof HTMLElement) && !(node instanceof SVGElement)) ||
+            !node.hasAttribute('style')
+        ) {
             return;
         }
 
