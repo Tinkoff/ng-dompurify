@@ -26,7 +26,7 @@ const createDOMPurify = dompurify;
 @Injectable({
     providedIn: 'root',
 })
-export class NgDompurifySanitizer extends Sanitizer {
+export class NgDompurifySanitizer implements Sanitizer {
     private readonly domPurify: DOMPurifyI;
 
     constructor(
@@ -38,8 +38,6 @@ export class NgDompurifySanitizer extends Sanitizer {
         @Inject(DOMPURIFY_HOOKS)
         hooks: ReadonlyArray<NgDompurifyHook>,
     ) {
-        super();
-
         this.domPurify = createDOMPurify(defaultView as Window);
         this.domPurify.addHook(
             'uponSanitizeElement',

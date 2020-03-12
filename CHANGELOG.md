@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v2.0.1...v2.1.0) (2020-03-11)
+
+### Bug Fixes
+
+-   **service:** implements now Angular Sanitizer insted of extending it to prevent problems in Ivy projects ([2e7f7a7](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/2e7f7a7))
+
 ### [2.0.1](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v2.0.0...v2.0.1) (2020-02-26)
 
 ### Bug Fixes
