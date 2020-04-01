@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
--   **pipe:** uses config from DI by default ([888ef8b](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/888ef8b))
+-   **pipe:** config is now optional ([888ef8b](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/888ef8b))
 
 ## [2.1.0](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v2.0.1...v2.1.0) (2020-03-11)
 

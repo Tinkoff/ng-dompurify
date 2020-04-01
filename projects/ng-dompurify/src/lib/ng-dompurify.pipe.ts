@@ -1,7 +1,6 @@
-import {Inject, Pipe, PipeTransform, SecurityContext} from '@angular/core';
+import {Pipe, PipeTransform, SecurityContext} from '@angular/core';
 import {DomSanitizer, SafeValue} from '@angular/platform-browser';
 import {NgDompurifySanitizer} from './ng-dompurify.service';
-import {DOMPURIFY_CONFIG} from './tokens/dompurify-config';
 import {NgDompurifyConfig} from './types/ng-dompurify-config';
 
 /**
@@ -10,8 +9,6 @@ import {NgDompurifyConfig} from './types/ng-dompurify-config';
 @Pipe({name: 'dompurify'})
 export class NgDompurifyPipe implements PipeTransform {
     constructor(
-        @Inject(DOMPURIFY_CONFIG)
-        private readonly config: NgDompurifyConfig,
         private readonly sanitizer: NgDompurifySanitizer,
         private readonly domSanitizer: DomSanitizer,
     ) {}
@@ -19,7 +16,7 @@ export class NgDompurifyPipe implements PipeTransform {
     transform(
         value: {} | string | null,
         context: SecurityContext = SecurityContext.HTML,
-        config: NgDompurifyConfig = this.config,
+        config?: NgDompurifyConfig,
     ): SafeValue | null {
         const sanitizedValue = this.sanitizer.sanitize(context, value, config);
 
