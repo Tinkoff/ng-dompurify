@@ -16,7 +16,7 @@ export class NgDompurifyPipe implements PipeTransform {
     transform(
         value: {} | string | null,
         context: SecurityContext = SecurityContext.HTML,
-        config: NgDompurifyConfig = {},
+        config?: NgDompurifyConfig,
     ): SafeValue | null {
         const sanitizedValue = this.sanitizer.sanitize(context, value, config);
 
