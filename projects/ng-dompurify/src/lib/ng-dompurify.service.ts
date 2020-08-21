@@ -8,8 +8,6 @@ import {SANITIZE_STYLE} from './tokens/sanitize-style';
 import {NgDompurifyConfig} from './types/ng-dompurify-config';
 import {NgDompurifyHook} from './types/ng-dompurify-hook';
 import {SanitizeStyle} from './types/sanitize-style';
-import {createAfterSanitizeAttributes} from './utils/createAfterSanitizeAttributes';
-import {createUponSanitizeElementHook} from './utils/createUponSanitizeElementHook';
 
 const createDOMPurify = dompurify;
 
@@ -38,15 +36,7 @@ export class NgDompurifySanitizer implements Sanitizer {
         @Inject(DOMPURIFY_HOOKS)
         hooks: ReadonlyArray<NgDompurifyHook>,
     ) {
-        this.domPurify = createDOMPurify(defaultView as Window);
-        this.domPurify.addHook(
-            'uponSanitizeElement',
-            createUponSanitizeElementHook(this.sanitizeStyle),
-        );
-        this.domPurify.addHook(
-            'afterSanitizeAttributes',
-            createAfterSanitizeAttributes(this.sanitizeStyle),
-        );
+        this.domPurify = createDOMPurify(defaultView!);
 
         hooks.forEach(({name, hook}) => {
             this.domPurify.addHook(name, hook);

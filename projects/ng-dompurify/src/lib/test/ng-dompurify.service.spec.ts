@@ -5,10 +5,8 @@ import {NgDompurifySanitizer} from '../ng-dompurify.service';
 import {DOMPURIFY_HOOKS} from '../tokens/dompurify-hooks';
 import {SANITIZE_STYLE} from '../tokens/sanitize-style';
 import {NgDompurifyHook} from '../types/ng-dompurify-hook';
-import {createUponSanitizeElementHook} from '../utils/createUponSanitizeElementHook';
 import {cleanHtml, dirtyHtml} from './test-samples/html';
 import {sanitizeStyle} from './test-samples/sanitizeStyle';
-import {cleanStyleTag, dirtyStyleTag} from './test-samples/style';
 import {cleanUrl, dirtyUrl} from './test-samples/url';
 
 describe('NgDompurifySanitizer', () => {
@@ -69,16 +67,8 @@ describe('NgDompurifySanitizer', () => {
     });
 
     it('should sanitize styles', () => {
-        const html = `<div style="background-image: url(evil);">test</div>`;
-        const sanitized = service.sanitize(SecurityContext.HTML, html);
-
-        expect(sanitized).toBe(`<div>test</div>`);
-    });
-
-    it('should sanitize entire style tag', () => {
-        const sanitized = service.sanitize(SecurityContext.HTML, dirtyStyleTag);
-
-        expect(sanitized).toBe(cleanStyleTag);
+        expect(service.sanitize(SecurityContext.STYLE, 'test')).toBe(`test`);
+        expect(service.sanitize(SecurityContext.STYLE, '(test)')).toBe(``);
     });
 
     it('hooks should work', () => {
@@ -86,16 +76,6 @@ describe('NgDompurifySanitizer', () => {
         const sanitized = service.sanitize(SecurityContext.HTML, html);
 
         expect(sanitized).toBe(`<div>test</div>`);
-    });
-
-    it('clears style when sheet is not available', () => {
-        const style = document.createElement('STYLE');
-        const hook = createUponSanitizeElementHook(v => v);
-
-        style.textContent = 'hapica';
-        hook(style, null, {});
-
-        expect(style.textContent).toBe('');
     });
 });
 
@@ -114,7 +94,7 @@ describe('NgDompurifySanitizer default DI', () => {
         removeAllHooks();
     });
 
-    it('sanitizes styles into nothing by default', () => {
-        expect(service.sanitize(SecurityContext.STYLE, 'test')).toBe('');
+    it('does not sanitize styles by default', () => {
+        expect(service.sanitize(SecurityContext.STYLE, '(test)')).toBe('(test)');
     });
 });

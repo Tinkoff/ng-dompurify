@@ -2,7 +2,6 @@
  * Public API Surface of @tinkoff/ng-dompurify
  */
 export * from './lib/ng-dompurify.service';
-export * from './lib/ng-dompurify-dom.service';
 export * from './lib/ng-dompurify.pipe';
 export * from './lib/ng-dompurify.module';
 export * from './lib/tokens/dompurify-config';
