@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
--   **sanitizer:** Remove DOM implementation as unnecessary and update … ([#56](https://github.com/TinkoffCreditSystems/ng-dompurify/issues/56)) ([d50cbdd](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/d50cbdd))
+-   **sanitizer:** Remove DOM implementation as unnecessary and update docs accordingly, remove CSS sanitation by default ([#56](https://github.com/TinkoffCreditSystems/ng-dompurify/issues/56)) ([d50cbdd](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/d50cbdd))
 
 ## [2.2.0](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v2.1.0...v2.2.0) (2020-03-31)
 

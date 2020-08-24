@@ -1,6 +1,7 @@
 # NgDompurify
 
 [![Build](https://img.shields.io/travis/TinkoffCreditSystems/ng-dompurify/master?style=flat-square)](https://travis-ci.org/TinkoffCreditSystems/ng-dompurify)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@tinkoff/ng-dompurify)](https://bundlephobia.com/result?p=@tinkoff/ng-dompurify)
 [![Coverage Status](https://img.shields.io/coveralls/github/TinkoffCreditSystems/ng-dompurify?branch=master&style=flat-square)](https://coveralls.io/github/TinkoffCreditSystems/ng-dompurify?branch=master)
 [![npm version](https://img.shields.io/npm/v/@tinkoff/ng-dompurify.svg?style=flat-square)](https://npmjs.com/package/@tinkoff/ng-dompurify)
 [![code style: @tinkoff/linters](https://img.shields.io/badge/code%20style-%40tinkoff%2Flinters-blue?style=flat-square)](https://github.com/TinkoffCreditSystems/linters)
