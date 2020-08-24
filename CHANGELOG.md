@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v2.1.0...v3.0.0) (2020-08-24)
+
+### Bug Fixes
+
+-   **ssr:** fix type error in SSR environment ([#41](https://github.com/TinkoffCreditSystems/ng-dompurify/issues/41)) ([14299c5](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/14299c5))
+
+### Features
+
+-   **sanitizer:** Remove DOM implementation as unnecessary and update … ([#56](https://github.com/TinkoffCreditSystems/ng-dompurify/issues/56)) ([d50cbdd](https://github.com/TinkoffCreditSystems/ng-dompurify/commit/d50cbdd))
+
 ## [2.2.0](https://github.com/TinkoffCreditSystems/ng-dompurify/compare/v2.1.0...v2.2.0) (2020-03-31)
 
 ### Bug Fixes
