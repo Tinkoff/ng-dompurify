@@ -18,9 +18,10 @@ export class NgDompurifyPipe implements PipeTransform {
         context: SecurityContext = SecurityContext.HTML,
         config?: NgDompurifyConfig,
     ): SafeValue | null {
-        const sanitizedValue = this.sanitizer.sanitize(context, value, config);
-
-        return this.bypassSecurityTrust(context, sanitizedValue);
+        return this.bypassSecurityTrust(
+            context,
+            this.sanitizer.sanitize(context, value, config),
+        );
     }
 
     private bypassSecurityTrust(

@@ -5,8 +5,7 @@
 [![npm version](https://img.shields.io/npm/v/@tinkoff/ng-dompurify.svg?style=flat-square)](https://npmjs.com/package/@tinkoff/ng-dompurify)
 [![code style: @tinkoff/linters](https://img.shields.io/badge/code%20style-%40tinkoff%2Flinters-blue?style=flat-square)](https://github.com/TinkoffCreditSystems/linters)
 
-> This library implements `DOMPurify` as Angular entire `DomSanitizer` and as
-> standalone `Sanitizer` or `Pipe`. It delegates sanitizing to `DOMPurify` and
+> This library implements `DOMPurify` as Angular `Sanitizer` or `Pipe`. It delegates sanitizing to `DOMPurify` and
 > supports the same configuration. See [DOMPurify](https://github.com/cure53/DOMPurify).
 
 ## Install
@@ -58,20 +57,20 @@ export class MyComponent {
 }
 ```
 
-You can also substitute entire Angular `DomSanitizer` with `DOMPurify`:
+You can also substitute Angular `Sanitizer` with `DOMPurify` so it is
+automatically used all the time:
 
 ```typescript
-import {DomSanitizer} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {NgDompurifyDomSanitizer} from '@tinkoff/ng-dompurify';
+import {NgModule, Sanitizer} from '@angular/core';
+import {NgDompurifySanitizer} from '@tinkoff/ng-dompurify';
 // ...
 
 @NgModule({
     // ...
     providers: [
         {
-            provide: DomSanitizer,
-            useClass: NgDompurifyDomSanitizer,
+            provide: Sanitizer,
+            useClass: NgDompurifySanitizer,
         },
     ],
     // ...
@@ -81,22 +80,21 @@ export class AppModule {}
 
 ## Configuring
 
-`NgDompurifyPipe` supports passing DOMPurify config as an argument.
 Config for `NgDompurifySanitizer` or `NgDompurifyDomSanitizer` can be
-provided using token `DOMPURIFY_CONFIG`:
+provided using token `DOMPURIFY_CONFIG`. `NgDompurifyPipe` supports
+passing DOMPurify config as an argument to override config from DI.
 
 ```typescript
-import {DomSanitizer} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {NgDompurifyDomSanitizer, DOMPURIFY_CONFIG} from '@tinkoff/ng-dompurify';
+import {NgModule, Sanitizer} from '@angular/core';
+import {NgDompurifySanitizer, DOMPURIFY_CONFIG} from '@tinkoff/ng-dompurify';
 // ...
 
 @NgModule({
     // ...
     providers: [
         {
-            provide: DomSanitizer,
-            useClass: NgDompurifyDomSanitizer,
+            provide: Sanitizer,
+            useClass: NgDompurifySanitizer,
         },
         {
             provide: DOMPURIFY_CONFIG,
@@ -110,30 +108,25 @@ export class AppModule {}
 
 ## CSS sanitization
 
-DOMPurify does not support sanitizing CSS. `DomSanitizer` in Angular
-is organized in such a way that it only received CSS rule value, and
-not the name. Therefore, a method taking in CSS rule value and returning
-a sanitized value is required to support CSS. You can try using internal
-Angular import `ɵ_sanitizeStyle` since they use it themselves to use it in
-`platform-browser` package where `DomSanitizer` is implemented. This way
-level of CSS sanitization will be equal to native Angular with added benefit
-of supporting inline styles in `[innerHTML]` bindings.
+DOMPurify does not support sanitizing CSS. Angular starting version 10
+dropped CSS sanitation as something that presents no threat in supported
+browsers. You can still provide a handler to sanitize CSS rules values
+upon binding if you want to:
 
 ```typescript
-import {DomSanitizer} from '@angular/platform-browser';
-import {NgModule, ɵ_sanitizeStyle} from '@angular/core';
-import {NgDompurifyDomSanitizer, SANITIZE_STYLE} from '@tinkoff/ng-dompurify';
+import {NgModule, Sanitizer} from '@angular/core';
+import {NgDompurifySanitizer, SANITIZE_STYLE} from '@tinkoff/ng-dompurify';
 
 @NgModule({
     // ...
     providers: [
         {
-            provide: DomSanitizer,
-            useClass: NgDompurifyDomSanitizer,
+            provide: Sanitizer,
+            useClass: NgDompurifySanitizer,
         },
         {
             provide: SANITIZE_STYLE,
-            useValue: ɵ_sanitizeStyle,
+            useValue: yourImplementation, // <---
         },
     ],
     // ...
@@ -146,10 +139,9 @@ export class AppModule {}
 DOMPurify supports various hooks. You can provide them using `DOMPURIFY_HOOKS` token:
 
 ```typescript
-import {DomSanitizer} from '@angular/platform-browser';
-import {NgModule, ɵ_sanitizeStyle} from '@angular/core';
+import {NgModule, Sanitizer} from '@angular/core';
 import {
-    NgDompurifyDomSanitizer,
+    NgDompurifySanitizer,
     DOMPURIFY_HOOKS,
     SANITIZE_STYLE,
 } from '@tinkoff/ng-dompurify';
@@ -158,12 +150,12 @@ import {
     // ...
     providers: [
         {
-            provide: DomSanitizer,
-            useClass: NgDompurifyDomSanitizer,
+            provide: Sanitizer,
+            useClass: NgDompurifySanitizer,
         },
         {
             provide: SANITIZE_STYLE,
-            useValue: ɵ_sanitizeStyle,
+            useValue: yourImplementation,
         },
         {
             provide: DOMPURIFY_HOOKS,
