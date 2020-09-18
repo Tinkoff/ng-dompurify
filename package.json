@@ -22,7 +22,6 @@
     "description": "Inclusive Angular API for DOMPurify",
     "keywords": ["angular", "ng", "dompurify", "DomSanitizer", "tinkoff"],
     "license": "Apache-2.0",
-    "authors": [" <r.sedov@tinkoff.ru>", "Alex Inkin <a.inkin@tinkoff.ru>"],
     "author": {
         "name": "Roman Sedov",
         "email": "79601794011@ya.ru",
