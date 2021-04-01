@@ -9,6 +9,8 @@
 > This library implements `DOMPurify` as Angular `Sanitizer` or `Pipe`. It delegates sanitizing to `DOMPurify` and
 > supports the same configuration. See [DOMPurify](https://github.com/cure53/DOMPurify).
 
+Read more about Sanitization in Angular and how ng-dompurify works in [this article](https://medium.com/angular-in-depth/warning-sanitizing-html-stripped-some-content-and-how-to-deal-with-it-properly-10ff77012d5a).
+
 ## Install
 
 ```
