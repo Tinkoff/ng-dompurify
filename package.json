@@ -25,11 +25,9 @@
     "author": {
         "name": "Roman Sedov",
         "email": "79601794011@ya.ru",
-        "url" : "http://marsibarsi.me/"
+        "url": "http://marsibarsi.me/"
     },
-    "contributors": [
-        "Alex Inkin <alexander@inkin.ru>"
-    ],
+    "contributors": ["Alex Inkin <alexander@inkin.ru>"],
     "repository": "https://github.com/TinkoffCreditSystems/ng-dompurify",
     "bugs": "https://github.com/TinkoffCreditSystems/ng-dompurify/issues",
     "homepage": "https://github.com/TinkoffCreditSystems/ng-dompurify#README",
