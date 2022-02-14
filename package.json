@@ -25,11 +25,9 @@
     "author": {
         "name": "Roman Sedov",
         "email": "79601794011@ya.ru",
-        "url" : "http://marsibarsi.me/"
+        "url": "http://marsibarsi.me/"
     },
-    "contributors": [
-        "Alex Inkin <alexander@inkin.ru>"
-    ],
+    "contributors": ["Alex Inkin <alexander@inkin.ru>"],
     "repository": "https://github.com/TinkoffCreditSystems/ng-dompurify",
     "bugs": "https://github.com/TinkoffCreditSystems/ng-dompurify/issues",
     "homepage": "https://github.com/TinkoffCreditSystems/ng-dompurify#README",
@@ -43,7 +41,7 @@
         "@angular/platform-browser-dynamic": "^7.2.15",
         "@angular/router": "^7.2.15",
         "core-js": "^2.5.4",
-        "dompurify": "^2.0.7",
+        "dompurify": "^2.3.5",
         "rxjs": "^6.5.2",
         "tslib": "^1.10.0",
         "zone.js": "~0.8.29"

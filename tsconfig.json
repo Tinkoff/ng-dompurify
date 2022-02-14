@@ -17,6 +17,7 @@
         "lib": ["es2018", "dom"],
         "paths": {
             "@tinkoff/ng-dompurify": ["projects/ng-dompurify/src/public-api"]
-        }
+        },
+        "allowSyntheticDefaultImports": true
     }
 }
