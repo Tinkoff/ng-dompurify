@@ -29,16 +29,6 @@
                         "codeCoverage": true,
                         "browsers": "ChromeHeadless"
                     }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "projects/ng-dompurify/tsconfig.lib.json",
-                            "projects/ng-dompurify/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
-                    }
                 }
             }
         },
@@ -109,13 +99,6 @@
                         "production": {
                             "browserTarget": "demo:build:production"
                         }
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": ["projects/demo/tsconfig.json"],
-                        "exclude": ["**/node_modules/**"]
                     }
                 }
             }
