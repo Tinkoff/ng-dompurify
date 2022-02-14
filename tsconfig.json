@@ -19,5 +19,6 @@
         "paths": {
             "@tinkoff/ng-dompurify": ["projects/ng-dompurify/src/public-api"]
         }
-    }
+    },
+    "include": ["projects/demo/src/**/*.ts", "projects/ng-dompurify/src/**/*.ts"]
 }

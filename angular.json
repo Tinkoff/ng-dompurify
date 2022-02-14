@@ -13,6 +13,11 @@
                     "options": {
                         "tsConfig": "projects/ng-dompurify/tsconfig.lib.json",
                         "project": "projects/ng-dompurify/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "projects/ng-dompurify/tsconfig.lib.prod.json"
+                        }
                     }
                 },
                 "test": {
@@ -52,7 +57,7 @@
                         "main": "projects/demo/src/main.ts",
                         "polyfills": "projects/demo/src/polyfills.ts",
                         "tsConfig": "projects/demo/tsconfig.json",
-                        "aot": false,
+                        "aot": true,
                         "assets": [],
                         "styles": ["projects/demo/src/styles.css"],
                         "scripts": []
@@ -64,7 +69,6 @@
                             "sourceMap": false,
                             "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true,
@@ -73,10 +77,20 @@
                                     "type": "initial",
                                     "maximumWarning": "2mb",
                                     "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
                                 }
                             ]
                         },
                         "serve": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
                             "tsConfig": "tsconfig.json"
                         }
                     }
@@ -102,5 +116,8 @@
             }
         }
     },
-    "defaultProject": "ng-dompurify"
+    "defaultProject": "ng-dompurify",
+    "cli": {
+        "analytics": false
+    }
 }
