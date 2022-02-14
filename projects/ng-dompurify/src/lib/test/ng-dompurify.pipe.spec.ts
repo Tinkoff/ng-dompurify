@@ -32,7 +32,7 @@ describe('NgDompurifyPipe', () => {
         context?: SecurityContext = SecurityContext.HTML;
         config? = {};
 
-        @ViewChild('element')
+        @ViewChild('element', {static: false})
         readonly element!: ElementRef<HTMLElement>;
 
         get html(): boolean {
