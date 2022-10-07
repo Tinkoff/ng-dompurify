@@ -1,5 +1,6 @@
 import {Pipe, PipeTransform, SecurityContext} from '@angular/core';
 import {DomSanitizer, SafeValue} from '@angular/platform-browser';
+
 import {NgDompurifySanitizer} from './ng-dompurify.service';
 import {NgDompurifyConfig} from './types/ng-dompurify-config';
 

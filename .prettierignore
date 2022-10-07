@@ -1,0 +1,4 @@
+.angular
+dist
+**/coverage/**
+package-lock.json

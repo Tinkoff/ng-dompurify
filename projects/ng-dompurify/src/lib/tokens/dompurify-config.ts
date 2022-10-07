@@ -1,4 +1,5 @@
 import {InjectionToken} from '@angular/core';
+
 import {NgDompurifyConfig} from '../types/ng-dompurify-config';
 
 /**

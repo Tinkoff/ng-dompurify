@@ -1,4 +1,5 @@
 import {HookName} from 'dompurify';
+
 import {DompurifyHook} from './dompurify-hook';
 
 /**
