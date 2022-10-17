@@ -1,6 +1,8 @@
+import {APP_BASE_HREF} from '@angular/common';
 import {SecurityContext} from '@angular/core';
 import {TestBed} from '@angular/core/testing';
 import {removeAllHooks} from 'dompurify';
+
 import {NgDompurifySanitizer} from '../ng-dompurify.service';
 import {DOMPURIFY_HOOKS} from '../tokens/dompurify-hooks';
 import {SANITIZE_STYLE} from '../tokens/sanitize-style';
@@ -10,7 +12,7 @@ import {sanitizeStyle} from './test-samples/sanitizeStyle';
 import {cleanUrl, dirtyUrl} from './test-samples/url';
 
 describe('NgDompurifySanitizer', () => {
-    const hooks: ReadonlyArray<NgDompurifyHook> = [
+    const hooks: readonly NgDompurifyHook[] = [
         {
             name: 'beforeSanitizeAttributes',
             hook: (node: Element) => {
@@ -34,6 +36,10 @@ describe('NgDompurifySanitizer', () => {
                     useValue: hooks,
                 },
                 NgDompurifySanitizer,
+                {
+                    provide: APP_BASE_HREF,
+                    useValue: '/',
+                },
             ],
         });
 
@@ -84,7 +90,13 @@ describe('NgDompurifySanitizer default DI', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [NgDompurifySanitizer],
+            providers: [
+                NgDompurifySanitizer,
+                {
+                    provide: APP_BASE_HREF,
+                    useValue: '/',
+                },
+            ],
         });
 
         service = TestBed.get(NgDompurifySanitizer);

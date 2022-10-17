@@ -1,7 +1,8 @@
-import {CommonModule} from '@angular/common';
+import {APP_BASE_HREF, CommonModule} from '@angular/common';
 import {Component, ElementRef, SecurityContext, ViewChild} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {removeAllHooks} from 'dompurify';
+
 import {NgDompurifyModule} from '../ng-dompurify.module';
 import {SANITIZE_STYLE} from '../tokens/sanitize-style';
 import {cleanHtml, dirtyHtml} from './test-samples/html';
@@ -11,29 +12,33 @@ import {cleanUrl, dirtyUrl} from './test-samples/url';
 describe('NgDompurifyPipe', () => {
     @Component({
         template: `
-            <div #element *ngIf="html" [innerHTML]="content | dompurify: context:config">
+            <div
+                *ngIf="html"
+                #element
+                [innerHTML]="content | dompurify: context:config"
+            >
                 test
             </div>
             <div
-                #element
                 *ngIf="style"
+                #element
                 [style.color]="content | dompurify: context:config"
             ></div>
             <img
-                #element
                 *ngIf="url"
+                #element
                 alt=""
                 [src]="content | dompurify: context:config"
             />
         `,
     })
     class TestComponent {
+        @ViewChild('element')
+        readonly element!: ElementRef<HTMLElement>;
+
         content = '';
         context?: SecurityContext = SecurityContext.HTML;
         config? = {};
-
-        @ViewChild('element')
-        readonly element!: ElementRef<HTMLElement>;
 
         get html(): boolean {
             return (
@@ -67,6 +72,10 @@ describe('NgDompurifyPipe', () => {
                 {
                     provide: SANITIZE_STYLE,
                     useValue: sanitizeStyle,
+                },
+                {
+                    provide: APP_BASE_HREF,
+                    useValue: '/',
                 },
             ],
         });

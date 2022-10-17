@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+
 import {NgDompurifyPipe} from './ng-dompurify.pipe';
 
 @NgModule({

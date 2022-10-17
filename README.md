@@ -9,7 +9,8 @@
 > This library implements `DOMPurify` as Angular `Sanitizer` or `Pipe`. It delegates sanitizing to `DOMPurify` and
 > supports the same configuration. See [DOMPurify](https://github.com/cure53/DOMPurify).
 
-Read more about Sanitization in Angular and how ng-dompurify works in [this article](https://medium.com/angular-in-depth/warning-sanitizing-html-stripped-some-content-and-how-to-deal-with-it-properly-10ff77012d5a).
+Read more about Sanitization in Angular and how ng-dompurify works in
+[this article](https://medium.com/angular-in-depth/warning-sanitizing-html-stripped-some-content-and-how-to-deal-with-it-properly-10ff77012d5a).
 
 ## Install
 
@@ -26,14 +27,13 @@ npm install --save-dev @types/dompurify
 
 ## How to use
 
-Either use pipe to sanitize your content when binding to `[innerHTML]`
-or use `NgDompurifySanitizer` service manually.
+Either use pipe to sanitize your content when binding to `[innerHTML]` or use `NgDompurifySanitizer` service manually.
 
 ```typescript
 import {NgDompurifyModule} from '@tinkoff/ng-dompurify';
 
 @NgModule({
-    imports: [NgDompurifyModule],
+  imports: [NgDompurifyModule],
 })
 export class MyModule {}
 ```
@@ -52,16 +52,15 @@ import {NgDompurifySanitizer} from '@tinkoff/ng-dompurify';
 
 @Component({})
 export class MyComponent {
-    constructor(private readonly dompurifySanitizer: NgDompurifySanitizer) {}
+  constructor(private readonly dompurifySanitizer: NgDompurifySanitizer) {}
 
-    purify(value: string): string {
-        return this.dompurifySanitizer.sanitize(SecurityContext.HTML, value);
-    }
+  purify(value: string): string {
+    return this.dompurifySanitizer.sanitize(SecurityContext.HTML, value);
+  }
 }
 ```
 
-You can also substitute Angular `Sanitizer` with `DOMPurify` so it is
-automatically used all the time:
+You can also substitute Angular `Sanitizer` with `DOMPurify` so it is automatically used all the time:
 
 ```typescript
 import {NgModule, Sanitizer} from '@angular/core';
@@ -69,23 +68,22 @@ import {NgDompurifySanitizer} from '@tinkoff/ng-dompurify';
 // ...
 
 @NgModule({
-    // ...
-    providers: [
-        {
-            provide: Sanitizer,
-            useClass: NgDompurifySanitizer,
-        },
-    ],
-    // ...
+  // ...
+  providers: [
+    {
+      provide: Sanitizer,
+      useClass: NgDompurifySanitizer,
+    },
+  ],
+  // ...
 })
 export class AppModule {}
 ```
 
 ## Configuring
 
-Config for `NgDompurifySanitizer` or `NgDompurifyDomSanitizer` can be
-provided using token `DOMPURIFY_CONFIG`. `NgDompurifyPipe` supports
-passing DOMPurify config as an argument to override config from DI.
+Config for `NgDompurifySanitizer` or `NgDompurifyDomSanitizer` can be provided using token `DOMPURIFY_CONFIG`.
+`NgDompurifyPipe` supports passing DOMPurify config as an argument to override config from DI.
 
 ```typescript
 import {NgModule, Sanitizer} from '@angular/core';
@@ -93,46 +91,45 @@ import {NgDompurifySanitizer, DOMPURIFY_CONFIG} from '@tinkoff/ng-dompurify';
 // ...
 
 @NgModule({
-    // ...
-    providers: [
-        {
-            provide: Sanitizer,
-            useClass: NgDompurifySanitizer,
-        },
-        {
-            provide: DOMPURIFY_CONFIG,
-            useValue: {FORBID_ATTR: ['id']},
-        },
-    ],
-    // ...
+  // ...
+  providers: [
+    {
+      provide: Sanitizer,
+      useClass: NgDompurifySanitizer,
+    },
+    {
+      provide: DOMPURIFY_CONFIG,
+      useValue: {FORBID_ATTR: ['id']},
+    },
+  ],
+  // ...
 })
 export class AppModule {}
 ```
 
 ## CSS sanitization
 
-DOMPurify does not support sanitizing CSS. Angular starting version 10
-dropped CSS sanitation as something that presents no threat in supported
-browsers. You can still provide a handler to sanitize CSS rules values
-upon binding if you want to:
+DOMPurify does not support sanitizing CSS. Angular starting version 10 dropped CSS sanitation as something that presents
+no threat in supported browsers. You can still provide a handler to sanitize CSS rules values upon binding if you want
+to:
 
 ```typescript
 import {NgModule, Sanitizer} from '@angular/core';
 import {NgDompurifySanitizer, SANITIZE_STYLE} from '@tinkoff/ng-dompurify';
 
 @NgModule({
-    // ...
-    providers: [
-        {
-            provide: Sanitizer,
-            useClass: NgDompurifySanitizer,
-        },
-        {
-            provide: SANITIZE_STYLE,
-            useValue: yourImplementation, // <---
-        },
-    ],
-    // ...
+  // ...
+  providers: [
+    {
+      provide: Sanitizer,
+      useClass: NgDompurifySanitizer,
+    },
+    {
+      provide: SANITIZE_STYLE,
+      useValue: yourImplementation, // <---
+    },
+  ],
+  // ...
 })
 export class AppModule {}
 ```
@@ -143,41 +140,36 @@ DOMPurify supports various hooks. You can provide them using `DOMPURIFY_HOOKS` t
 
 ```typescript
 import {NgModule, Sanitizer} from '@angular/core';
-import {
-    NgDompurifySanitizer,
-    DOMPURIFY_HOOKS,
-    SANITIZE_STYLE,
-} from '@tinkoff/ng-dompurify';
+import {NgDompurifySanitizer, DOMPURIFY_HOOKS, SANITIZE_STYLE} from '@tinkoff/ng-dompurify';
 
 @NgModule({
-    // ...
-    providers: [
+  // ...
+  providers: [
+    {
+      provide: Sanitizer,
+      useClass: NgDompurifySanitizer,
+    },
+    {
+      provide: SANITIZE_STYLE,
+      useValue: yourImplementation,
+    },
+    {
+      provide: DOMPURIFY_HOOKS,
+      useValue: [
         {
-            provide: Sanitizer,
-            useClass: NgDompurifySanitizer,
+          name: 'beforeSanitizeAttributes',
+          hook: (node: Element) => {
+            node.removeAttribute('id');
+          },
         },
-        {
-            provide: SANITIZE_STYLE,
-            useValue: yourImplementation,
-        },
-        {
-            provide: DOMPURIFY_HOOKS,
-            useValue: [
-                {
-                    name: 'beforeSanitizeAttributes',
-                    hook: (node: Element) => {
-                        node.removeAttribute('id');
-                    },
-                },
-            ],
-        },
-    ],
-    // ...
+      ],
+    },
+  ],
+  // ...
 })
 export class AppModule {}
 ```
 
 ## Demo
 
-You can see live demo here:
-https://stackblitz.com/github/TinkoffCreditSystems/ng-dompurify/tree/master/projects/demo
+You can see live demo here: https://stackblitz.com/github/TinkoffCreditSystems/ng-dompurify/tree/master/projects/demo

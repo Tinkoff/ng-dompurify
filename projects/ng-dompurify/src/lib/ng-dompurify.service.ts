@@ -1,7 +1,7 @@
 import {DOCUMENT} from '@angular/common';
 import {Inject, Injectable, Sanitizer, SecurityContext} from '@angular/core';
-import * as dompurify from 'dompurify';
-import {DOMPurifyI} from 'dompurify';
+import dompurify, {DOMPurifyI} from 'dompurify';
+
 import {DOMPURIFY_CONFIG} from './tokens/dompurify-config';
 import {DOMPURIFY_HOOKS} from './tokens/dompurify-hooks';
 import {SANITIZE_STYLE} from './tokens/sanitize-style';
@@ -34,7 +34,7 @@ export class NgDompurifySanitizer implements Sanitizer {
         private readonly sanitizeStyle: SanitizeStyle,
         @Inject(DOCUMENT) {defaultView}: Document,
         @Inject(DOMPURIFY_HOOKS)
-        hooks: ReadonlyArray<NgDompurifyHook>,
+        hooks: readonly NgDompurifyHook[],
     ) {
         this.domPurify = createDOMPurify(defaultView!);
 

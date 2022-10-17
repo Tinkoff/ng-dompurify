@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  workflows:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js and Cache
+        uses: ./.github/actions/nodejs
+
+      - run: npm run prettier -- --check
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run build:library
+      - run: npm run build:demo
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true

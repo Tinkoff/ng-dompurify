@@ -9,30 +9,10 @@
             "sourceRoot": "projects/ng-dompurify/src",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "builder": "@angular-devkit/build-angular:ng-packagr",
                     "options": {
                         "tsConfig": "projects/ng-dompurify/tsconfig.lib.json",
                         "project": "projects/ng-dompurify/ng-package.json"
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "projects/ng-dompurify/src/test.ts",
-                        "tsConfig": "projects/ng-dompurify/tsconfig.spec.json",
-                        "karmaConfig": "projects/ng-dompurify/karma.conf.js",
-                        "codeCoverage": true,
-                        "browsers": "ChromeHeadless"
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "projects/ng-dompurify/tsconfig.lib.json",
-                            "projects/ng-dompurify/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
                     }
                 }
             }
@@ -51,20 +31,23 @@
                         "index": "projects/demo/src/index.html",
                         "main": "projects/demo/src/main.ts",
                         "polyfills": "projects/demo/src/polyfills.ts",
-                        "tsConfig": "projects/demo/tsconfig.json",
-                        "aot": false,
+                        "tsConfig": "projects/demo/tsconfig.app.json",
                         "assets": [],
                         "styles": ["projects/demo/src/styles.css"],
-                        "scripts": []
+                        "scripts": [],
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     },
                     "configurations": {
                         "production": {
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
-                            "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true,
@@ -73,13 +56,24 @@
                                     "type": "initial",
                                     "maximumWarning": "2mb",
                                     "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
                                 }
                             ]
                         },
                         "serve": {
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
                             "tsConfig": "tsconfig.json"
                         }
-                    }
+                    },
+                    "defaultConfiguration": ""
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -92,11 +86,40 @@
                         }
                     }
                 },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
+                "server": {
+                    "builder": "@angular-devkit/build-angular:server",
                     "options": {
-                        "tsConfig": ["projects/demo/tsconfig.json"],
-                        "exclude": ["**/node_modules/**"]
+                        "outputPath": "dist/demo/server",
+                        "main": "projects/demo/src/server.ts",
+                        "tsConfig": "projects/demo/tsconfig.server.json",
+                        "sourceMap": true,
+                        "optimization": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "outputHashing": "media",
+                            "sourceMap": false,
+                            "optimization": true
+                        },
+                        "development": {
+                            "outputHashing": "media",
+                            "sourceMap": true,
+                            "optimization": false
+                        }
+                    },
+                    "defaultConfiguration": "development"
+                },
+                "serve-ssr": {
+                    "builder": "@nguniversal/builders:ssr-dev-server",
+                    "options": {
+                        "browserTarget": "demo:build",
+                        "serverTarget": "demo:server"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "demo:build:production",
+                            "serverTarget": "demo:server:production"
+                        }
                     }
                 }
             }
