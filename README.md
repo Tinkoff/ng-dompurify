@@ -1,6 +1,5 @@
 # NgDompurify
 
-[![Build](https://img.shields.io/travis/TinkoffCreditSystems/ng-dompurify/master?style=flat-square)](https://travis-ci.org/TinkoffCreditSystems/ng-dompurify)
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/@tinkoff/ng-dompurify)](https://bundlephobia.com/result?p=@tinkoff/ng-dompurify)
 [![Coverage Status](https://img.shields.io/coveralls/github/TinkoffCreditSystems/ng-dompurify?branch=master&style=flat-square)](https://coveralls.io/github/TinkoffCreditSystems/ng-dompurify?branch=master)
 [![npm version](https://img.shields.io/npm/v/@tinkoff/ng-dompurify.svg?style=flat-square)](https://npmjs.com/package/@tinkoff/ng-dompurify)
@@ -169,6 +168,19 @@ import {NgDompurifySanitizer, DOMPURIFY_HOOKS, SANITIZE_STYLE} from '@tinkoff/ng
 })
 export class AppModule {}
 ```
+
+## Maintained
+
+**@tinkoff/ng-dompurify** is a part of [Taiga UI](https://github.com/Tinkoff/taiga-ui) libraries family which is backed and used by a
+large enterprise. This means you can rely on timely support and continuous development.
+
+## License
+
+🆓 Feel free to use our library in your commercial and private applications
+
+All **@tinkoff/ng-dompurify** packages are covered by [Apache 2.0](/LICENSE)
+
+Read more about this license [here](https://choosealicense.com/licenses/apache-2.0/)
 
 ## Demo
 
